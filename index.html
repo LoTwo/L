@@ -5,132 +5,539 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>10周年抽抽乐</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: -apple-system, 'PingFang SC', Roboto, sans-serif;
-            background: #FFFACD; padding: 20px 30px; min-height: 100vh;
+            background: #FFFACD;
+            padding: 20px 30px;
+            min-height: 100vh;
         }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .main-title { font-size: 42px; font-weight: 900; text-align: center; color: #5BA3D9; padding: 10px 0 24px; letter-spacing: 3px; }
-        .stats-wrapper { background: rgba(255,255,255,0.8); border-radius: 20px; padding: 18px 24px; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.5); }
-        .stats-row { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; }
-        .stat-card { background: rgba(255,255,255,0.5); border-radius: 14px; padding: 14px 8px; text-align: center; }
-        .stat-card .label { font-size: 14px; font-weight: 600; color: #888; }
-        .stat-card .value { font-size: 30px; font-weight: 800; margin-top: 2px; }
-        .stat-card .percent { font-size: 12px; color: #aaa; }
-        .stat-ur .value { color: #E91E63; } .stat-sp .value { color: #E74C3C; } .stat-ssr .value { color: #d4a017; } .stat-sr .value { color: #9B59B6; } .stat-r .value { color: #5B8DD9; } .stat-total .value { color: #5BA3D9; }
-        .pool-tabs { display: flex; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
-        .pool-tab { padding: 10px 34px; border-radius: 40px; border: 2px solid #c0dce8; background: #fff; font-weight: 700; font-size: 18px; cursor: pointer; color: #555; transition: all 0.15s; }
-        .pool-tab.active { border-color: #5BA3D9; background: #5BA3D9; color: #fff; box-shadow: 0 4px 16px rgba(91,163,217,0.3); }
-        .pool-tab:hover:not(.active) { border-color: #7EC8E3; background: #f8fcff; }
-        .toolbar { display: flex; gap: 12px; margin: 6px 0 18px; flex-wrap: wrap; }
-        .btn { padding: 10px 28px; border-radius: 40px; border: none; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.15s; }
-        .btn-primary { background: linear-gradient(135deg,#5BA3D9,#89CFF0); color: #fff; box-shadow: 0 4px 16px rgba(91,163,217,0.25); }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            color: #5BA3D9;
+            padding: 10px 0 24px;
+            letter-spacing: 3px;
+        }
+
+        .stats-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px 28px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 14px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 14px;
+            padding: 16px 8px;
+            text-align: center;
+        }
+        .stat-card .label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #888;
+        }
+        .stat-card .value {
+            font-size: 34px;
+            font-weight: 800;
+            margin-top: 2px;
+        }
+        .stat-card .percent {
+            font-size: 13px;
+            color: #aaa;
+        }
+        .stat-ur .value { color: #E91E63; }
+        .stat-sp .value { color: #E74C3C; }
+        .stat-ssr .value { color: #d4a017; }
+        .stat-sr .value { color: #9B59B6; }
+        .stat-r .value { color: #5B8DD9; }
+        .stat-total .value { color: #5BA3D9; }
+
+        .pool-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .pool-tab {
+            padding: 12px 38px;
+            border-radius: 40px;
+            border: 2px solid #c0dce8;
+            background: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            color: #555;
+            transition: all 0.15s;
+        }
+        .pool-tab.active {
+            border-color: #5BA3D9;
+            background: #5BA3D9;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(91, 163, 217, 0.3);
+        }
+        .pool-tab:hover:not(.active) {
+            border-color: #7EC8E3;
+            background: #f8fcff;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin: 6px 0 18px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 32px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #5BA3D9, #89CFF0);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(91, 163, 217, 0.25);
+        }
         .btn-primary:hover { transform: translateY(-2px); }
-        .btn-danger { background: #fff; border: 2px solid #f0e6ed; color: #c0392b; }
+        .btn-danger {
+            background: #fff;
+            border: 2px solid #f0e6ed;
+            color: #c0392b;
+        }
         .btn-danger:hover { background: #fef6f5; }
 
-        .pool-section { margin-bottom: 28px; border-radius: 20px; padding: 20px; background: #fefef9; }
-        .pool-section-title { font-size: 26px; font-weight: 800; color: #5a4a3a; padding-bottom: 6px; margin-bottom: 16px; border-bottom: none; }
+        .pool-section {
+            margin-bottom: 32px;
+        }
+        .pool-section-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #5BA3D9;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #5BA3D9;
+            margin-bottom: 18px;
+        }
 
-        .rarity-groups-flow { display: flex; flex-wrap: wrap; gap: 20px 28px; align-items: flex-start; }
-        .rarity-group { flex: 0 1 auto; }
-        .rarity-label { font-size: 18px; font-weight: 700; display: inline-block; margin-bottom: 8px; padding: 4px 18px; border-radius: 12px; background: #f5efe2; color: #5a4a3a; }
-        .rarity-ur .rarity-label { background: #fce4ec; color: #b34159; }
-        .rarity-sp .rarity-label { background: #ffeaea; color: #b83a2a; }
-        .rarity-ssr .rarity-label { background: #fef6e0; color: #8a6914; }
-        .rarity-sr .rarity-label { background: #f3e8f7; color: #7b4a8c; }
-        .rarity-r .rarity-label { background: #e8f0fe; color: #4a6fa5; }
+        .rarity-group {
+            margin-bottom: 18px;
+        }
+        .rarity-label {
+            font-size: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 0 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.5);
+        }
 
-        .category-row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-start; }
-        .category-box { background: rgba(255,255,255,0.7); border: 2px solid #e0d6c2; border-radius: 16px; padding: 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: fit-content; min-width: 130px; max-width: 100%; flex: 0 0 auto; }
-        .category-box .category-label { font-size: 16px; font-weight: 700; color: #5a4a3a; cursor: pointer; padding: 2px 10px; border-radius: 8px; background: rgba(255,255,255,0.6); white-space: nowrap; display: flex; flex-direction: column; align-items: center; line-height: 1.3; width: auto; }
-        .category-label:hover { background: rgba(91,163,217,0.15); }
-        .category-box .category-label .total-count { font-size: 12px; font-weight: 600; color: #8b7355; }
-        .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; width: 100%; }
+        /* ===== 横向排列容器 ===== */
+        .category-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            align-items: stretch;
+        }
+
+        /* ===== 分类方块 ===== */
+        .category-box {
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 16px;
+            padding: 18px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 260px;
+            flex: 0 0 auto;
+            min-height: 140px;
+        }
+
+        .category-box .category-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.3;
+            width: 100%;
+            text-align: center;
+        }
+        .category-box .category-label .total-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5BA3D9;
+        }
+        .category-box .category-label:hover {
+            background: rgba(91, 163, 217, 0.15);
+        }
+
+        .category-box .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            justify-content: center;
+            width: 100%;
+        }
 
         .card-mini {
-            width: 90px; flex: 0 0 90px; background: #fff; border-radius: 10px; padding: 8px 8px; text-align: center;
-            cursor: pointer; transition: all 0.15s; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px 16px;
+            border: 2px solid #edeaf3;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            min-width: 60px;
+            flex: 0 1 auto;
         }
-        .card-mini:active { transform: scale(0.95); }
-        .card-mini .mini-id { font-weight: 700; font-size: 17px; color: #333; white-space: nowrap; }
-        .card-mini .mini-count { font-size: 11px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-        .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
-        .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
-        .card-mini .owned-dot { display: inline-block; margin-left: 2px; font-size: 10px; color: #c9a87c; }
-        .card-mini.rarity-ur { border-color: #E91E63; } .card-mini.rarity-sp { border-color: #E74C3C; } .card-mini.rarity-ssr { border-color: #d4a017; } .card-mini.rarity-sr { border-color: #9B59B6; } .card-mini.rarity-r { border-color: #5B8DD9; }
-        .card-mini.unowned { border-color: #ddd !important; }
-        .card-mini.rarity-ur.owned { background: #ffe6ec; } .card-mini.rarity-sp.owned { background: #ffeaea; } .card-mini.rarity-ssr.owned { background: #fef6e0; } .card-mini.rarity-sr.owned { background: #f3e8f7; } .card-mini.rarity-r.owned { background: #e8f0fe; }
+        .card-mini:active {
+            transform: scale(0.95);
+        }
+        .card-mini .mini-id {
+            font-weight: 700;
+            font-size: 17px;
+            color: #333;
+        }
+        .card-mini .mini-count {
+            font-size: 13px;
+            color: #999;
+            margin-top: 2px;
+        }
+        .card-mini .mini-count span {
+            color: #5BA3D9;
+            font-weight: 700;
+        }
+        .card-mini.unowned {
+            opacity: 0.35;
+            filter: grayscale(0.6);
+        }
+        .card-mini .owned-dot {
+            display: inline-block;
+            margin-left: 3px;
+            font-size: 12px;
+            color: #5BA3D9;
+        }
+        .card-mini.rarity-ur { border-color: #E91E63; }
+        .card-mini.rarity-sp { border-color: #E74C3C; }
+        .card-mini.rarity-ssr { border-color: #d4a017; }
+        .card-mini.rarity-sr { border-color: #9B59B6; }
+        .card-mini.rarity-r { border-color: #5B8DD9; }
+        .card-mini.unowned { border-color: #edeaf3 !important; }
 
-        .empty-state { text-align: center; padding: 40px 20px; color: #ccc; font-size: 18px; }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ccc;
+            font-size: 18px;
+        }
 
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
+        /* ===== 弹窗 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
         .modal-overlay.active { display: flex; }
-        .modal { background: #fff; border-radius: 24px; max-width: 680px; width: 100%; max-height: 92vh; overflow-y: auto; padding: 24px 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
-        .modal h2 { font-size: 22px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-        .modal .close-btn { margin-left: auto; background: none; border: none; font-size: 26px; cursor: pointer; color: #aaa; padding: 0 6px; }
+        .modal {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 24px 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        .modal h2 {
+            font-size: 24px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal .close-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
+            padding: 0 6px;
+        }
         .modal .close-btn:active { color: #555; }
         .modal .form-group { margin-bottom: 14px; }
-        .modal .form-group label { font-weight: 600; display: block; margin-bottom: 3px; font-size: 13px; color: #555; }
-        .modal .form-group select, .modal .form-group input[type="number"], .modal .form-group input[type="datetime-local"] { width: 100%; padding: 8px 12px; border-radius: 10px; border: 2px solid #e0dceb; font-size: 14px; outline: none; background: #fff; }
-        .modal .form-group select:focus, .modal .form-group input:focus { border-color: #5BA3D9; }
-        .time-mode-group { display: flex; gap: 8px; margin-bottom: 8px; }
-        .time-mode-btn { padding: 5px 16px; border-radius: 24px; border: 2px solid #ddd; background: #fff; font-weight: 600; font-size: 13px; cursor: pointer; color: #555; flex: 1; text-align: center; }
-        .time-mode-btn.active { border-color: #5BA3D9; background: #5BA3D9; color: #fff; }
-        .slot-list { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 14px; max-height: 300px; overflow-y: auto; padding-right: 4px; }
-        .slot-row { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; background: #f8f6fc; padding: 8px 12px; border-radius: 12px; border: 1px solid #edeaf3; }
-        .slot-row .slot-index { font-weight: 700; color: #888; min-width: 34px; font-size: 13px; }
-        .slot-row select { flex: 2 1 160px; padding: 6px 10px; border-radius: 8px; border: 2px solid #e0dceb; font-size: 13px; background: #fff; outline: none; }
-        .slot-row select:focus { border-color: #5BA3D9; }
-        .modal .btn-group { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
-        .modal .btn-group .btn { flex: 1 1 auto; justify-content: center; }
-        #modalMessage { margin-top: 10px; color: #e74c3c; font-size: 13px; font-weight: 600; }
+        .modal .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 14px;
+            color: #555;
+        }
+        .modal .form-group select,
+        .modal .form-group input[type="number"],
+        .modal .form-group input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #e0dceb;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+        }
+        .modal .form-group select:focus,
+        .modal .form-group input:focus {
+            border-color: #5BA3D9;
+        }
 
-        #detailModal .modal { max-width: 460px; text-align: center; }
-        #detailImage { max-width: 100%; max-height: 50vh; border-radius: 14px; margin-top: 6px; background: #f0ecf7; border: 1px solid #edeaf3; }
-        #detailName { margin-top: 12px; font-weight: 700; font-size: 22px; }
-        #detailRarity { margin-top: 3px; font-size: 15px; color: #888; }
-        #detailHistory { margin-top: 10px; text-align: left; font-size: 13px; color: #555; max-height: 180px; overflow-y: auto; background: #f8f6fc; padding: 8px 12px; border-radius: 10px; border: 1px solid #edeaf3; }
-        .batch-group { margin-bottom: 4px; border-bottom: 1px dashed #ddd; padding-bottom: 3px; }
-        .batch-group:last-child { border-bottom: none; margin-bottom: 0; }
-        .batch-title { font-weight: 700; color: #5BA3D9; font-size: 13px; }
-        .batch-time { font-size: 11px; color: #999; }
-        .batch-index-list { font-size: 12px; color: #555; padding-left: 4px; }
-        .batch-index-list .idx-item { display: inline-block; margin-right: 4px; background: rgba(91,163,217,0.08); padding: 0 6px; border-radius: 4px; }
+        .time-mode-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .time-mode-btn {
+            padding: 6px 18px;
+            border-radius: 24px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            color: #555;
+            flex: 1;
+            text-align: center;
+        }
+        .time-mode-btn.active {
+            border-color: #5BA3D9;
+            background: #5BA3D9;
+            color: #fff;
+        }
 
-        .footer-actions { margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #edeaf3; padding-top: 14px; flex-wrap: wrap; }
+        .slot-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 8px 0 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .slot-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            align-items: center;
+            background: #f8f6fc;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #edeaf3;
+        }
+        .slot-row .slot-index {
+            font-weight: 700;
+            color: #888;
+            min-width: 34px;
+            font-size: 13px;
+        }
+        .slot-row select {
+            flex: 2 1 160px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 2px solid #e0dceb;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+        }
+        .slot-row select:focus {
+            border-color: #5BA3D9;
+        }
 
-        .category-modal .modal { max-width: 520px; }
-        .category-grid { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
-        .category-grid .cat-img { width: 200px; max-width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f0ecf7; border: 1px solid #edeaf3; }
-        .category-grid .cat-label { font-size: 14px; text-align: center; font-weight: 600; color: #555; margin-top: 4px; }
+        .modal .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+        .modal .btn-group .btn {
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+        #modalMessage {
+            margin-top: 10px;
+            color: #e74c3c;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
+        /* ===== 详情弹窗 ===== */
+        #detailModal .modal {
+            max-width: 460px;
+            text-align: center;
+        }
+        #detailImage {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 14px;
+            margin-top: 6px;
+            background: #f0ecf7;
+            border: 1px solid #edeaf3;
+        }
+        #detailName {
+            margin-top: 12px;
+            font-weight: 700;
+            font-size: 22px;
+        }
+        #detailRarity {
+            margin-top: 3px;
+            font-size: 15px;
+            color: #888;
+        }
+        #detailHistory {
+            margin-top: 10px;
+            text-align: left;
+            font-size: 13px;
+            color: #555;
+            max-height: 180px;
+            overflow-y: auto;
+            background: #f8f6fc;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid #edeaf3;
+        }
+        .batch-group {
+            margin-bottom: 4px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 3px;
+        }
+        .batch-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .batch-title {
+            font-weight: 700;
+            color: #5BA3D9;
+            font-size: 13px;
+        }
+        .batch-time {
+            font-size: 11px;
+            color: #999;
+        }
+        .batch-index-list {
+            font-size: 12px;
+            color: #555;
+            padding-left: 4px;
+        }
+        .batch-index-list .idx-item {
+            display: inline-block;
+            margin-right: 4px;
+            background: rgba(91, 163, 217, 0.08);
+            padding: 0 6px;
+            border-radius: 4px;
+        }
+
+        .footer-actions {
+            margin-top: 24px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid #edeaf3;
+            padding-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== 分类照片弹窗（仅非UR使用） ===== */
+        .category-modal .modal {
+            max-width: 520px;
+        }
+        .category-grid {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .category-grid .cat-img {
+            width: 220px;
+            max-width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #f0ecf7;
+            border: 1px solid #edeaf3;
+        }
+        .category-grid .cat-label {
+            font-size: 14px;
+            text-align: center;
+            font-weight: 600;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        /* ===== 响应式 ===== */
         @media (max-width: 900px) {
             body { padding: 14px 16px; }
-            .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
-            .main-title { font-size: 32px; }
-            .pool-tab { font-size: 15px; padding: 8px 20px; }
+            .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .main-title { font-size: 34px; }
+            .pool-tab { font-size: 16px; padding: 8px 20px; }
             .pool-section-title { font-size: 22px; }
-            .card-mini { width: 78px; flex: 0 0 78px; padding: 6px 6px; }
+            .category-box { width: 220px; padding: 14px 16px; }
+            .card-mini { padding: 8px 12px; min-width: 50px; }
             .card-mini .mini-id { font-size: 15px; }
         }
         @media (max-width: 600px) {
             body { padding: 10px 12px; }
-            .stats-row { grid-template-columns: repeat(2,1fr); gap: 6px; }
-            .stat-card .value { font-size: 24px; }
-            .main-title { font-size: 26px; }
-            .pool-tab { font-size: 13px; padding: 6px 14px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .stat-card .value { font-size: 26px; }
+            .main-title { font-size: 28px; }
+            .pool-tab { font-size: 14px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 68px; flex: 0 0 68px; padding: 5px 4px; }
-            .card-mini .mini-id { font-size: 14px; }
+            .category-row { gap: 10px; }
+            .category-box { width: 100%; flex: 0 0 100%; padding: 12px 14px; }
+            .card-mini { padding: 6px 10px; min-width: 42px; }
+            .card-mini .mini-id { font-size: 13px; }
+            .card-mini .mini-count { font-size: 11px; }
             .modal { padding: 14px; }
             .modal h2 { font-size: 18px; }
-            .category-grid .cat-img { width: 150px; }
+            .category-grid .cat-img { width: 160px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 60px; flex: 0 0 60px; padding: 4px 3px; }
-            .card-mini .mini-id { font-size: 13px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .category-box { padding: 8px 10px; }
+            .card-mini { padding: 4px 8px; min-width: 34px; }
+            .card-mini .mini-id { font-size: 11px; }
+            .card-mini .mini-count { font-size: 10px; }
+            .category-box .category-label { font-size: 14px; }
+            .category-grid .cat-img { width: 130px; }
         }
         .slot-list::-webkit-scrollbar { width: 4px; }
         .slot-list::-webkit-scrollbar-thumb { background: #d5cee8; border-radius: 8px; }
@@ -139,6 +546,7 @@
 </head>
 <body>
 <div class="container">
+
     <div class="main-title">10周年抽抽乐</div>
 
     <div class="stats-wrapper">
@@ -173,20 +581,30 @@
     <!-- 新增抽卡弹窗 -->
     <div class="modal-overlay" id="addModal">
         <div class="modal">
-            <h2>📥 新增抽卡记录 <button class="close-btn" id="closeAddModalBtn">✕</button></h2>
-            <div class="form-group"><label>选择卡池</label><select id="modalPool"><option value="A">A卡池-兔兔池</option><option value="B">B卡池-猫猫池</option></select></div>
-            <div class="form-group"><label>抽数</label><input type="number" id="modalPullCount" value="5" min="1" max="99" /></div>
-            <div class="form-group"><label>⏰ 时间模式</label>
+            <h2>📥 新增抽卡记录 <button class="close-btn" id="closeModal">✕</button></h2>
+            <div class="form-group">
+                <label>选择卡池</label>
+                <select id="modalPool"><option value="A">A卡池-兔兔池</option><option value="B">B卡池-猫猫池</option></select>
+            </div>
+            <div class="form-group">
+                <label>抽数</label>
+                <input type="number" id="modalPullCount" value="5" min="1" max="99" />
+            </div>
+            <div class="form-group">
+                <label>⏰ 时间模式</label>
                 <div class="time-mode-group" id="timeModeGroup">
                     <button class="time-mode-btn active" data-mode="now">当前时间</button>
                     <button class="time-mode-btn" data-mode="custom">自定义时间</button>
                 </div>
                 <input type="datetime-local" id="customTimeInput" style="display:none; margin-top:6px;" />
             </div>
-            <div class="form-group"><label>每一抽的卡牌</label><div class="slot-list" id="slotList"></div></div>
+            <div class="form-group">
+                <label>每一抽的卡牌</label>
+                <div class="slot-list" id="slotList"></div>
+            </div>
             <div class="btn-group">
                 <button class="btn btn-primary" id="submitPull">✅ 确认添加</button>
-                <button class="btn btn-danger" id="cancelAddBtn">取消</button>
+                <button class="btn btn-danger" id="cancelModal">取消</button>
             </div>
             <div id="modalMessage"></div>
         </div>
@@ -195,50 +613,55 @@
     <!-- 卡牌详情弹窗 -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
-            <button class="close-btn" id="closeDetailBtn">✕</button>
-            <img id="detailImage" src="" alt="卡牌图片" style="display:block; margin: 0 auto;" />
-            <div id="detailName" style="margin-top:12px;"></div>
-            <div id="detailRarity" style="margin-top:4px;"></div>
-            <div id="detailHistory" style="margin-top:8px;"></div>
+            <button class="close-btn" id="closeDetail" style="float:right;font-size:24px;background:none;border:none;cursor:pointer;">✕</button>
+            <img id="detailImage" src="" alt="卡牌图片" />
+            <div id="detailName"></div>
+            <div id="detailRarity"></div>
+            <div id="detailHistory"></div>
         </div>
     </div>
 
-    <!-- 分类照片弹窗 -->
+    <!-- 分类照片弹窗（仅非UR使用） -->
     <div class="modal-overlay" id="categoryModal">
         <div class="modal" style="max-width:520px;">
-            <h2>📸 <span id="categoryModalTitle">分类名称</span><button class="close-btn" id="closeCategoryBtn">✕</button></h2>
+            <h2>📸 <span id="categoryModalTitle">分类名称</span>
+                <button class="close-btn" id="closeCategoryModal">✕</button>
+            </h2>
             <div class="category-grid" id="categoryGrid"></div>
         </div>
     </div>
 </div>
 
 <script>
-(function() {
-    const STORAGE_KEY = 'tenniversary_cards_v12';
+    // ================================================================
+    //  数据配置
+    // ================================================================
 
-    // 数据定义
+    const STORAGE_KEY = 'tenniversary_cards_final_v10';
+
     const CARD_CATEGORIES = {
         'R': [
-            { category: '写真卡', ids: ['r1','r2','r3','r4'] },
-            { category: '活动卡', ids: ['r5','r6','r7','r8'] },
-            { category: '横卡', ids: ['r9','r10','r11','r12'] }
+            { category: '写真卡', ids: ['r1', 'r2', 'r3', 'r4'] },
+            { category: '活动卡', ids: ['r5', 'r6', 'r7', 'r8'] },
+            { category: '横卡', ids: ['r9', 'r10', 'r11', 'r12'] }
         ],
         'SR': [
-            { category: '背影卡', ids: ['sr1','sr2'] },
-            { category: '宠物卡', ids: ['sr3','sr4','sr5','sr6'] },
-            { category: '拼字卡', ids: ['sr7','sr8','sr9','sr10'] },
+            { category: '背影卡', ids: ['sr1', 'sr2'] },
+            { category: '宠物卡', ids: ['sr3', 'sr4', 'sr5', 'sr6'] },
+            { category: '拼字卡', ids: ['sr7', 'sr8', 'sr9', 'sr10'] },
             { category: '童年卡', ids: ['sr11'] }
         ],
         'SSR': [
-            { category: '搞怪卡', ids: ['ssr1','ssr2','ssr3'] },
-            { category: '古风卡', ids: ['ssr4','ssr5'] },
-            { category: '早期卡', ids: ['ssr6','ssr7','ssr8'] }
+            { category: '搞怪卡', ids: ['ssr1', 'ssr2', 'ssr3'] },
+            { category: '古风卡', ids: ['ssr4', 'ssr5'] },
+            { category: '早期卡', ids: ['ssr6', 'ssr7', 'ssr8'] }
         ],
         'SP': [
-            { category: '手写卡', ids: ['sp1','sp2','sp3','sp4'] },
-            { category: '连环画卡', ids: ['sp5','sp6'] }
+            { category: '手写卡', ids: ['sp1', 'sp2', 'sp3', 'sp4'] },
+            { category: '连环画卡', ids: ['sp5', 'sp6'] }
         ]
     };
+
     const UR_CATEGORIES = {
         'A': [
             { category: '兔兔卡套', ids: ['ur1'] },
@@ -255,371 +678,748 @@
             { category: '签名照', ids: ['ur5'] }
         ]
     };
-    const RARITY_ORDER = { 'UR':0, 'SP':1, 'SSR':2, 'SR':3, 'R':4 };
 
-    // 工具函数
-    const getRarity = id => {
+    const RARITY_ORDER = { 'UR': 0, 'SP': 1, 'SSR': 2, 'SR': 3, 'R': 4 };
+
+    function getAllCardIds() {
+        const ids = [];
+        Object.keys(CARD_CATEGORIES).forEach(rarity => {
+            CARD_CATEGORIES[rarity].forEach(cat => {
+                cat.ids.forEach(id => { ids.push(id); });
+            });
+        });
+        for (let i = 1; i <= 5; i++) { ids.push('ur' + i); }
+        return ids;
+    }
+
+    function getRarity(id) {
         if (id.startsWith('ur')) return 'UR';
-        for (const [r, cats] of Object.entries(CARD_CATEGORIES)) {
-            if (cats.some(c => c.ids.includes(id))) return r;
+        for (const [rarity, cats] of Object.entries(CARD_CATEGORIES)) {
+            for (const cat of cats) {
+                if (cat.ids.includes(id)) return rarity;
+            }
         }
         return 'R';
-    };
-    const getCategory = (id, pool) => {
+    }
+
+    function getCategory(id, pool) {
         if (id.startsWith('ur')) {
-            const arr = UR_CATEGORIES[pool] || [];
-            const found = arr.find(c => c.ids.includes(id));
-            return found ? found.category : 'UR';
+            if (UR_CATEGORIES[pool]) {
+                for (const cat of UR_CATEGORIES[pool]) {
+                    if (cat.ids.includes(id)) return cat.category;
+                }
+            }
+            return 'UR';
         }
-        for (const cats of Object.values(CARD_CATEGORIES)) {
-            const found = cats.find(c => c.ids.includes(id));
-            if (found) return found.category;
+        for (const [rarity, cats] of Object.entries(CARD_CATEGORIES)) {
+            for (const cat of cats) {
+                if (cat.ids.includes(id)) return cat.category;
+            }
         }
         return id;
-    };
-    const getCardImg = (pool, id) => `./images/${pool}_${id}.png`;
-    const getCatImg = (pool, id) => {
-        if (id.startsWith('ur')) return getCardImg(pool, id);
-        return `./images/${pool}_${getCategory(id, pool)}.png`;
-    };
+    }
 
-    // 数据加载
-    let appData = { cards: [] };
-    let currentView = 'all';
+    function getDisplayName(id, pool) {
+        return id;
+    }
 
-    const loadData = () => {
+    // ===== 图片路径：所有卡都区分池子 =====
+    function getCardImagePath(pool, id) {
+        return `./images/${pool}_${id}.png`;
+    }
+
+    // 分类标签弹窗：使用分类名图片（仅非UR）
+    function getCategoryImagePath(pool, category) {
+        return `./images/${pool}_${category}.png`;
+    }
+
+    function getRarityColor(r) {
+        const map = { R: '#5B8DD9', SR: '#9B59B6', SSR: '#d4a017', SP: '#E74C3C', UR: '#E91E63' };
+        return map[r] || '#888';
+    }
+
+    function getDefaultData() { return { cards: [] }; }
+
+    function loadData() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
                 const parsed = JSON.parse(raw);
                 if (parsed && Array.isArray(parsed.cards)) {
                     parsed.cards.forEach(c => {
-                        if (!Array.isArray(c.history)) {
+                        if (!c.history || !Array.isArray(c.history)) {
+                            const count = c.count || 1;
+                            const now = new Date().toISOString();
                             c.history = [];
-                            for (let i=0; i<(c.count||0); i++) c.history.push({ time: new Date().toISOString(), globalIndex: 0 });
+                            for (let i = 0; i < count; i++) {
+                                c.history.push({ time: now, globalIndex: 0 });
+                            }
+                        } else {
+                            if (c.history.length > 0 && typeof c.history[0] === 'string') {
+                                c.history = c.history.map(t => ({ time: t, globalIndex: 0 }));
+                            }
                         }
                         c.count = c.history.length;
                     });
-                    appData = parsed;
-                    return;
+                    return parsed;
                 }
             }
-        } catch (e) { console.warn('数据读取失败，已重置'); }
-        appData = { cards: [] };
-    };
-    const saveData = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-    const totalPulls = () => appData.cards.reduce((sum, c) => sum + c.history.length, 0);
+        } catch (_) {}
+        return getDefaultData();
+    }
 
-    // DOM 元素
-    const $ = s => document.querySelector(s);
-    const poolTabs = document.querySelectorAll('.pool-tab');
-    const cardList = $('#cardList');
-    const stats = {
-        total: $('#statTotal'), ur: $('#statUR'), sp: $('#statSP'), ssr: $('#statSSR'), sr: $('#statSR'), r: $('#statR'),
-        totalPct: $('#statTotalPct'), urPct: $('#statURPct'), spPct: $('#statSPPct'), ssrPct: $('#statSSRPct'), srPct: $('#statSRPct'), rPct: $('#statRPct')
-    };
+    function saveData(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
 
-    // 渲染统计
-    const renderStats = () => {
-        const counts = { UR:0, SP:0, SSR:0, SR:0, R:0 };
+    function getTotalPulls() {
         let total = 0;
-        appData.cards.forEach(c => {
+        appData.cards.forEach(c => { total += c.history.length; });
+        return total;
+    }
+
+    // ================================================================
+    //  状态
+    // ================================================================
+
+    let appData = loadData();
+    let currentView = 'all';
+
+    // ================================================================
+    //  DOM 引用
+    // ================================================================
+
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+
+    const poolTabs = $$('.pool-tab');
+    const cardList = $('#cardList');
+    const clearAllBtn = $('#clearAllBtn');
+
+    const statTotal = $('#statTotal');
+    const statUR = $('#statUR');
+    const statSP = $('#statSP');
+    const statSSR = $('#statSSR');
+    const statSR = $('#statSR');
+    const statR = $('#statR');
+    const statTotalPct = $('#statTotalPct');
+    const statURPct = $('#statURPct');
+    const statSPPct = $('#statSPPct');
+    const statSSRPct = $('#statSSRPct');
+    const statSRPct = $('#statSRPct');
+    const statRPct = $('#statRPct');
+
+    const addModal = $('#addModal');
+    const openAddBtn = $('#openAddModal');
+    const closeModalBtn = $('#closeModal');
+    const cancelModalBtn = $('#cancelModal');
+    const modalPool = $('#modalPool');
+    const modalPullCount = $('#modalPullCount');
+    const slotList = $('#slotList');
+    const submitPullBtn = $('#submitPull');
+    const modalMessage = $('#modalMessage');
+
+    const timeModeGroup = $('#timeModeGroup');
+    const customTimeInput = $('#customTimeInput');
+
+    const detailModal = $('#detailModal');
+    const detailImage = $('#detailImage');
+    const detailName = $('#detailName');
+    const detailRarity = $('#detailRarity');
+    const detailHistory = $('#detailHistory');
+    const closeDetailBtn = $('#closeDetail');
+
+    const categoryModal = $('#categoryModal');
+    const categoryModalTitle = $('#categoryModalTitle');
+    const categoryGrid = $('#categoryGrid');
+    const closeCategoryModalBtn = $('#closeCategoryModal');
+
+    // ================================================================
+    //  工具函数
+    // ================================================================
+
+    function genId() {
+        return Date.now() + Math.random().toString(36).substr(2, 6);
+    }
+
+    function formatTime(iso) {
+        const d = new Date(iso);
+        return d.toLocaleString('zh-CN', { hour12: false });
+    }
+
+    // ================================================================
+    //  渲染
+    // ================================================================
+
+    function renderStats() {
+        const allCards = appData.cards;
+        let total = 0;
+        const counts = { UR: 0, SP: 0, SSR: 0, SR: 0, R: 0 };
+        allCards.forEach(c => {
             const r = getRarity(c.name);
             if (counts.hasOwnProperty(r)) counts[r] += c.history.length;
             total += c.history.length;
         });
-        stats.total.textContent = total;
-        stats.ur.textContent = counts.UR;
-        stats.sp.textContent = counts.SP;
-        stats.ssr.textContent = counts.SSR;
-        stats.sr.textContent = counts.SR;
-        stats.r.textContent = counts.R;
-        const pct = n => total ? Math.round(n/total*100)+'%' : '0%';
-        stats.totalPct.textContent = '100%';
-        stats.urPct.textContent = pct(counts.UR);
-        stats.spPct.textContent = pct(counts.SP);
-        stats.ssrPct.textContent = pct(counts.SSR);
-        stats.srPct.textContent = pct(counts.SR);
-        stats.rPct.textContent = pct(counts.R);
-    };
 
-    // 弹窗控制
-    const showModal = id => document.getElementById(id).classList.add('active');
-    const hideModal = id => document.getElementById(id).classList.remove('active');
+        statTotal.textContent = total;
+        statUR.textContent = counts.UR;
+        statSP.textContent = counts.SP;
+        statSSR.textContent = counts.SSR;
+        statSR.textContent = counts.SR;
+        statR.textContent = counts.R;
 
-    // 详情弹窗
-    const showDetail = (pool, id, card) => {
-        const rarity = getRarity(id);
-        document.getElementById('detailImage').src = getCardImg(pool, id);
-        document.getElementById('detailName').textContent = `${pool}池 · ${id}`;
-        document.getElementById('detailRarity').textContent = `稀有度：${rarity} ｜ ${card ? '共抽到 '+card.history.length+' 次' : '尚未抽到'}`;
-        const historyDiv = document.getElementById('detailHistory');
-        if (card && card.history.length) {
-            const groups = {};
-            card.history.forEach(h => {
-                if (!groups[h.time]) groups[h.time] = { time: h.time, indices: [] };
-                groups[h.time].indices.push(h.globalIndex);
-            });
-            const keys = Object.keys(groups).sort((a,b) => new Date(a)-new Date(b));
-            let html = '';
-            keys.forEach((key, i) => {
-                const g = groups[key];
-                g.indices.sort((a,b)=>a-b);
-                html += `<div class="batch-group"><div class="batch-title">第 ${i+1} 批</div><div class="batch-time">⏰ ${new Date(key).toLocaleString('zh-CN')}</div><div class="batch-index-list">${g.indices.map(idx => `<span class="idx-item">第${idx}抽</span>`).join('')}</div></div>`;
-            });
-            historyDiv.innerHTML = html;
-        } else {
-            historyDiv.innerHTML = '<div style="color:#999;">还没有抽到这张卡</div>';
-        }
-        showModal('detailModal');
-    };
+        const pct = (n) => total === 0 ? '0%' : Math.round((n / total) * 100) + '%';
+        statTotalPct.textContent = '100%';
+        statURPct.textContent = pct(counts.UR);
+        statSPPct.textContent = pct(counts.SP);
+        statSSRPct.textContent = pct(counts.SSR);
+        statSRPct.textContent = pct(counts.SR);
+        statRPct.textContent = pct(counts.R);
+    }
 
-    // 分类照片弹窗
-    const showCatPhotos = (category, ids, pool) => {
-        document.getElementById('categoryModalTitle').textContent = `${pool}池 · ${category}`;
-        const imgSrc = getCatImg(pool, ids[0]);
-        document.getElementById('categoryGrid').innerHTML = `
+    // 分类照片弹窗：仅用于非UR
+    function showCategoryPhotos(category, ids, pool) {
+        categoryModalTitle.textContent = `${pool}池 · ${category}`;
+        const imgSrc = getCategoryImagePath(pool, category);
+        let html = `
             <div>
-                <img class="cat-img" src="${imgSrc}" alt="${category}" onerror="this.style.display='none'" />
+                <img class="cat-img" src="${imgSrc}" alt="${category}" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0ecf7%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23ccc%22%3E%F0%9F%96%BC%EF%B8%8F%3C/text%3E%3C/svg%3E'" />
                 <div class="cat-label">${category}</div>
                 <div style="font-size:11px;color:#999;">编号：${ids.join('、')}</div>
             </div>
         `;
-        showModal('categoryModal');
-    };
+        categoryGrid.innerHTML = html;
+        categoryModal.classList.add('active');
+    }
 
-    // 构建单个稀有度区块（带分类标签，用于全部视图）
-    const renderRarityWithCats = (rarity, pool, poolCards) => {
-        const cats = rarity.startsWith('ur') ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
-        if (!cats) return '';
-        let html = `<div class="rarity-group rarity-${rarity.toLowerCase()}"><div class="rarity-label">${rarity}</div><div class="category-row">`;
-        cats.forEach(cat => {
-            const ids = cat.ids;
-            let total = 0;
-            ids.forEach(id => {
-                const card = poolCards.find(c => c.name === id);
-                if (card) total += card.history.length;
-            });
-            html += `<div class="category-box">`;
-            html += `<span class="category-label" data-category="${cat.category}" data-pool="${pool}" data-ids='${JSON.stringify(ids)}'>${cat.category}<span class="total-count">总拥有 ${total} 张</span></span>`;
-            html += `<div class="card-grid">`;
-            ids.forEach(id => {
-                const card = poolCards.find(c => c.name === id);
-                const count = card ? card.history.length : 0;
-                const isOwned = count > 0;
-                html += `<div class="card-mini ${isOwned ? 'rarity-'+rarity.toLowerCase()+' owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div>${isOwned ? '<span class="owned-dot">●</span>' : ''}</div>`;
-            });
+    function renderAllView() {
+        const pools = ['A', 'B'];
+        const poolLabels = { A: 'A卡池-兔兔池', B: 'B卡池-猫猫池' };
+
+        let html = '';
+
+        pools.forEach(pool => {
+            const poolCards = appData.cards.filter(c => c.pool === pool);
+
+            html += `<div class="pool-section">`;
+            html += `<div class="pool-section-title">${poolLabels[pool]}</div>`;
+
+            // ===== UR：显示分类标签 + 卡片 =====
+            html += `<div class="rarity-group">`;
+            html += `<div class="rarity-label" style="color:${getRarityColor('UR')}">UR</div>`;
+            html += `<div class="category-row">`;
+            if (UR_CATEGORIES[pool]) {
+                UR_CATEGORIES[pool].forEach(cat => {
+                    const ids = cat.ids;
+                    let totalCount = 0;
+                    ids.forEach(id => {
+                        const existing = poolCards.find(c => c.name === id);
+                        if (existing) totalCount += existing.history.length;
+                    });
+                    // 每个UR分类作为一个方块
+                    html += `<div class="category-box">`;
+                    // 分类标签：可点击，点击后显示该UR卡的详情（与点击卡片相同）
+                    html += `
+                        <span class="category-label ur-label" data-pool="${pool}" data-id="${ids[0]}" style="cursor:pointer;">
+                            📸 ${cat.category}
+                            <span class="total-count">总拥有 ${totalCount} 张</span>
+                        </span>
+                    `;
+                    html += `<div class="card-grid">`;
+                    ids.forEach(id => {
+                        const existing = poolCards.find(c => c.name === id);
+                        const count = existing ? existing.history.length : 0;
+                        const isOwned = count > 0;
+                        html += `
+                            <div class="card-mini ${isOwned ? 'rarity-ur' : 'unowned'}" 
+                                 data-pool="${pool}" data-id="${id}">
+                                <div class="mini-id">${id}</div>
+                                <div class="mini-count">${isOwned ? '拥有 <span>' + count + '</span> 张' : '未拥有'}</div>
+                                ${isOwned ? '<span class="owned-dot">●</span>' : ''}
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                });
+            }
             html += `</div></div>`;
-        });
-        html += `</div></div>`;
-        return html;
-    };
 
-    // 构建单个稀有度区块（无分类标签，用于单卡池视图）
-    const renderRaritySimple = (rarity, pool, poolCards) => {
-        const cats = rarity.startsWith('ur') ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
-        if (!cats) return '';
-        const allIds = [];
-        cats.forEach(c => allIds.push(...c.ids));
-        allIds.sort();
-        let html = `<div class="rarity-group rarity-${rarity.toLowerCase()}"><div class="rarity-label">${rarity}</div><div class="category-row">`;
-        allIds.forEach(id => {
-            const card = poolCards.find(c => c.name === id);
-            const count = card ? card.history.length : 0;
-            const isOwned = count > 0;
-            html += `<div class="card-mini ${isOwned ? 'rarity-'+rarity.toLowerCase()+' owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div>${isOwned ? '<span class="owned-dot">●</span>' : ''}</div>`;
-        });
-        html += `</div></div>`;
-        return html;
-    };
+            // ===== 非UR：显示分类标签 + 卡片 =====
+            const sortedRarities = Object.keys(CARD_CATEGORIES).sort((a, b) => RARITY_ORDER[a] - RARITY_ORDER[b]);
 
-    // 绑定事件
-    const bindEvents = (hasCategories) => {
-        document.querySelectorAll('.card-mini').forEach(el => {
+            sortedRarities.forEach(rarity => {
+                const cats = CARD_CATEGORIES[rarity];
+                html += `<div class="rarity-group">`;
+                html += `<div class="rarity-label" style="color:${getRarityColor(rarity)}">${rarity}</div>`;
+                html += `<div class="category-row">`;
+
+                cats.forEach(cat => {
+                    const ids = cat.ids;
+                    let totalCount = 0;
+                    ids.forEach(id => {
+                        const existing = poolCards.find(c => c.name === id);
+                        if (existing) totalCount += existing.history.length;
+                    });
+
+                    html += `<div class="category-box">`;
+                    html += `
+                        <span class="category-label" data-category="${cat.category}" data-pool="${pool}" data-ids='${JSON.stringify(ids)}'>
+                            📸 ${cat.category}
+                            <span class="total-count">总拥有 ${totalCount} 张</span>
+                        </span>
+                    `;
+                    html += `<div class="card-grid">`;
+                    ids.forEach(id => {
+                        const existing = poolCards.find(c => c.name === id);
+                        const count = existing ? existing.history.length : 0;
+                        const isOwned = count > 0;
+                        html += `
+                            <div class="card-mini ${isOwned ? 'rarity-' + rarity.toLowerCase() : 'unowned'}" 
+                                 data-pool="${pool}" data-id="${id}">
+                                <div class="mini-id">${id}</div>
+                                <div class="mini-count">${isOwned ? '拥有 <span>' + count + '</span> 张' : '未拥有'}</div>
+                                ${isOwned ? '<span class="owned-dot">●</span>' : ''}
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                });
+
+                html += `</div></div>`;
+            });
+
+            html += `</div>`;
+        });
+
+        cardList.innerHTML = html;
+
+        // 点击卡片 -> 使用编号图片
+        cardList.querySelectorAll('.card-mini').forEach(el => {
             el.addEventListener('click', function() {
                 const pool = this.dataset.pool;
                 const id = this.dataset.id;
                 const card = appData.cards.find(c => c.pool === pool && c.name === id);
-                showDetail(pool, id, card);
+                if (card) {
+                    showDetail(card);
+                } else {
+                    showUnownedDetail(pool, id);
+                }
             });
         });
-        if (hasCategories) {
-            document.querySelectorAll('.category-label').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const cat = this.dataset.category;
-                    const pool = this.dataset.pool;
-                    const ids = JSON.parse(this.dataset.ids);
-                    showCatPhotos(cat, ids, pool);
-                });
+
+        // 点击分类标签（非UR）-> 使用分类名图片
+        cardList.querySelectorAll('.category-label:not(.ur-label)').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const category = this.dataset.category;
+                const pool = this.dataset.pool;
+                const ids = JSON.parse(this.dataset.ids);
+                showCategoryPhotos(category, ids, pool);
             });
-        }
-    };
-
-    // 主渲染
-    const render = () => {
-        renderStats();
-        if (currentView === 'all') {
-            const pools = ['A', 'B'];
-            const labels = { A:'A卡池-兔兔池', B:'B卡池-猫猫池' };
-            let html = '';
-            pools.forEach(pool => {
-                const poolCards = appData.cards.filter(c => c.pool === pool);
-                html += `<div class="pool-section"><div class="pool-section-title">${labels[pool]}</div>`;
-                html += renderRarityWithCats('UR', pool, poolCards);
-                const sorted = Object.keys(CARD_CATEGORIES).sort((a,b) => RARITY_ORDER[a] - RARITY_ORDER[b]);
-                html += `<div class="rarity-groups-flow">${sorted.map(r => renderRarityWithCats(r, pool, poolCards)).join('')}</div>`;
-                html += `</div>`;
-            });
-            cardList.innerHTML = html || '<div class="empty-state">还没有卡牌，点击「新增抽卡」开始记录！</div>';
-            bindEvents(true);
-        } else {
-            const poolCards = appData.cards.filter(c => c.pool === currentView);
-            if (poolCards.length === 0) {
-                cardList.innerHTML = '<div class="empty-state">这个卡池还没有卡牌，开始记录吧！</div>';
-                return;
-            }
-            const label = currentView === 'A' ? 'A卡池-兔兔池' : 'B卡池-猫猫池';
-            let html = `<div class="pool-section"><div class="pool-section-title">${label}</div>`;
-            html += renderRaritySimple('UR', currentView, poolCards);
-            const sorted = Object.keys(CARD_CATEGORIES).sort((a,b) => RARITY_ORDER[a] - RARITY_ORDER[b]);
-            html += `<div class="rarity-groups-flow">${sorted.map(r => renderRaritySimple(r, currentView, poolCards)).join('')}</div>`;
-            html += `</div>`;
-            cardList.innerHTML = html;
-            bindEvents(false);
-        }
-    };
-
-    // 新增抽卡弹窗相关
-    const slotList = $('#slotList');
-    const modalPullCount = $('#modalPullCount');
-    const modalPool = $('#modalPool');
-    const allCardIds = (() => {
-        const ids = [];
-        Object.values(CARD_CATEGORIES).forEach(cats => cats.forEach(c => ids.push(...c.ids)));
-        for (let i=1; i<=5; i++) ids.push('ur'+i);
-        return ids.sort();
-    })();
-
-    const renderSlots = (count) => {
-        let html = '';
-        for (let i=0; i<count; i++) {
-            html += `<div class="slot-row"><span class="slot-index">#${i+1}</span><select class="slot-card">${allCardIds.map(id => `<option value="${id}">${id}</option>`).join('')}</select></div>`;
-        }
-        slotList.innerHTML = html;
-    };
-
-    const setTimeMode = mode => {
-        document.querySelectorAll('.time-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-        const input = $('#customTimeInput');
-        input.style.display = mode === 'custom' ? 'block' : 'none';
-        if (mode === 'custom' && !input.value) {
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            input.value = now.toISOString().slice(0,16);
-        }
-    };
-
-    const openAddModal = () => {
-        showModal('addModal');
-        document.getElementById('modalMessage').textContent = '';
-        renderSlots(parseInt(modalPullCount.value,10) || 5);
-        setTimeMode('now');
-        modalPool.onchange = () => renderSlots(parseInt(modalPullCount.value,10) || 5);
-    };
-
-    const submitPull = () => {
-        const pool = modalPool.value;
-        const rows = document.querySelectorAll('.slot-card');
-        const cardsToAdd = [];
-        let hasError = false;
-        rows.forEach(sel => {
-            if (!sel.value) hasError = true;
-            else cardsToAdd.push(sel.value);
         });
-        if (hasError) {
-            document.getElementById('modalMessage').textContent = '请选择所有卡牌！';
+
+        // 点击UR分类标签 -> 显示UR卡详情（与点击卡片相同）
+        cardList.querySelectorAll('.ur-label').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const pool = this.dataset.pool;
+                const id = this.dataset.id;
+                const card = appData.cards.find(c => c.pool === pool && c.name === id);
+                if (card) {
+                    showDetail(card);
+                } else {
+                    showUnownedDetail(pool, id);
+                }
+            });
+        });
+    }
+
+    // ===== 单卡池视图：无分类标签，直接在稀有度下展示所有卡片 =====
+    function renderPoolView() {
+        const pool = currentView;
+        const poolCards = appData.cards.filter(c => c.pool === pool);
+
+        if (poolCards.length === 0) {
+            cardList.innerHTML = `<div class="empty-state">这个卡池还没有卡牌，开始记录吧！</div>`;
             return;
         }
-        const timeMode = document.querySelector('.time-mode-btn.active').dataset.mode;
-        let recordTime = new Date().toISOString();
-        if (timeMode === 'custom') {
-            const val = $('#customTimeInput').value;
-            if (!val) { document.getElementById('modalMessage').textContent = '请选择自定义时间！'; return; }
-            recordTime = new Date(val).toISOString();
+
+        const groups = {};
+        poolCards.forEach(c => {
+            const rarity = getRarity(c.name);
+            if (!groups[rarity]) groups[rarity] = [];
+            groups[rarity].push(c);
+        });
+
+        const sortedRarities = Object.keys(groups).sort((a, b) => RARITY_ORDER[a] - RARITY_ORDER[b]);
+        const poolLabel = pool === 'A' ? 'A卡池-兔兔池' : 'B卡池-猫猫池';
+
+        let html = `<div class="pool-section"><div class="pool-section-title">${poolLabel}</div>`;
+
+        sortedRarities.forEach(rarity => {
+            const cards = groups[rarity];
+            // 每个稀有度作为一个独立分组
+            html += `<div class="rarity-group">`;
+            html += `<div class="rarity-label" style="color:${getRarityColor(rarity)}">${rarity}</div>`;
+            // 直接用卡片网格，不加分类标签
+            html += `<div class="category-row" style="gap:12px 16px;">`;
+            // 所有卡片放在同一个卡片网格中，横向排列
+            html += `<div class="card-grid" style="gap:10px 14px; display:flex; flex-wrap:wrap;">`;
+            cards.forEach(c => {
+                const count = c.history.length;
+                const displayName = getDisplayName(c.name, pool);
+                html += `
+                    <div class="card-mini rarity-${rarity.toLowerCase()}" data-id="${c.id}" style="padding:8px 14px; min-width:52px;">
+                        <div class="mini-id" style="font-size:15px;">${displayName}</div>
+                        <div class="mini-count" style="font-size:12px;">拥有 <span>${count}</span> 张</div>
+                        <span class="owned-dot">●</span>
+                    </div>
+                `;
+            });
+            html += `</div></div></div>`;
+        });
+
+        html += `</div>`;
+        cardList.innerHTML = html;
+
+        cardList.querySelectorAll('.card-mini').forEach(el => {
+            el.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const card = appData.cards.find(c => c.id === id);
+                if (card) {
+                    showDetail(card);
+                }
+            });
+        });
+    }
+
+    function renderHistoryGrouped(history) {
+        if (!history || history.length === 0) {
+            return '<div style="color:#999;text-align:center;">还没有抽到这张卡</div>';
         }
-        let globalIdx = totalPulls();
+
+        const groups = {};
+        history.forEach(entry => {
+            const key = entry.time;
+            if (!groups[key]) {
+                groups[key] = { time: key, indices: [] };
+            }
+            groups[key].indices.push(entry.globalIndex);
+        });
+
+        const sortedKeys = Object.keys(groups).sort((a, b) => new Date(a) - new Date(b));
+
+        let html = '';
+        let batchNum = 1;
+        sortedKeys.forEach(key => {
+            const group = groups[key];
+            const sortedIndices = group.indices.sort((a, b) => a - b);
+            const timeStr = formatTime(key);
+            const indicesStr = sortedIndices.map(idx => `<span class="idx-item">第${idx}抽</span>`).join('');
+
+            html += `
+                <div class="batch-group">
+                    <div class="batch-title">第 ${batchNum} 批</div>
+                    <div class="batch-time">⏰ ${timeStr}</div>
+                    <div class="batch-index-list">${indicesStr}</div>
+                </div>
+            `;
+            batchNum++;
+        });
+
+        return html;
+    }
+
+    function showUnownedDetail(pool, id) {
+        const rarity = getRarity(id);
+        const displayName = getDisplayName(id, pool);
+        const imgSrc = getCardImagePath(pool, id);
+
+        detailImage.src = imgSrc;
+        detailImage.onerror = function() {
+            this.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0ecf7%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23ccc%22%3E%F0%9F%96%BC%EF%B8%8F%3C/text%3E%3C/svg%3E';
+        };
+        detailName.textContent = `${pool}池 · ${displayName}`;
+        detailRarity.textContent = `稀有度：${rarity} ｜ 尚未抽到`;
+        detailHistory.innerHTML = '<div style="color:#999;text-align:center;">还没有抽到这张卡</div>';
+        detailModal.classList.add('active');
+    }
+
+    function showDetail(card) {
+        const rarity = getRarity(card.name);
+        const pool = card.pool;
+        const displayName = getDisplayName(card.name, pool);
+        const imgSrc = getCardImagePath(pool, card.name);
+
+        detailImage.src = imgSrc;
+        detailImage.onerror = function() {
+            this.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0ecf7%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23ccc%22%3E%F0%9F%96%BC%EF%B8%8F%3C/text%3E%3C/svg%3E';
+        };
+        detailName.textContent = `${pool}池 · ${displayName}`;
+        detailRarity.textContent = `稀有度：${rarity} ｜ 共抽到 ${card.history.length} 次`;
+        detailHistory.innerHTML = renderHistoryGrouped(card.history);
+        detailModal.classList.add('active');
+    }
+
+    function closeDetail() {
+        detailModal.classList.remove('active');
+    }
+
+    function closeCategoryModal() {
+        categoryModal.classList.remove('active');
+    }
+
+    function renderAll() {
+        renderStats();
+        if (currentView === 'all') {
+            renderAllView();
+        } else {
+            renderPoolView();
+        }
+    }
+
+    // ================================================================
+    //  新增抽卡弹窗
+    // ================================================================
+
+    function openModal() {
+        addModal.classList.add('active');
+        modalMessage.textContent = '';
+        const count = parseInt(modalPullCount.value, 10) || 5;
+        const pool = modalPool.value;
+        renderSlots(count, pool);
+        setTimeMode('now');
+        modalPool.onchange = function() {
+            const newPool = this.value;
+            const cnt = parseInt(modalPullCount.value, 10) || 5;
+            renderSlots(cnt, newPool);
+        };
+    }
+
+    function closeModal() {
+        addModal.classList.remove('active');
+    }
+
+    function renderSlots(count, pool) {
+        const cardIds = getAllCardIds();
+        let html = '';
+        for (let i = 0; i < count; i++) {
+            html += `
+                <div class="slot-row" data-index="${i}">
+                    <span class="slot-index">#${i+1}</span>
+                    <select class="slot-card">
+                        ${cardIds.map(id => `<option value="${id}">${id}</option>`).join('')}
+                    </select>
+                </div>
+            `;
+        }
+        slotList.innerHTML = html;
+    }
+
+    function setTimeMode(mode) {
+        const btns = timeModeGroup.querySelectorAll('.time-mode-btn');
+        btns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+        if (mode === 'custom') {
+            customTimeInput.style.display = 'block';
+            if (!customTimeInput.value) {
+                const now = new Date();
+                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                customTimeInput.value = now.toISOString().slice(0, 16);
+            }
+        } else {
+            customTimeInput.style.display = 'none';
+        }
+    }
+
+    function submitPull() {
+        const pool = modalPool.value;
+        const rows = slotList.querySelectorAll('.slot-row');
+        const cardsToAdd = [];
+        let hasError = false;
+
+        rows.forEach(row => {
+            const select = row.querySelector('.slot-card');
+            const name = select.value;
+            if (!name) {
+                hasError = true;
+                row.style.border = '2px solid #e74c3c';
+                return;
+            } else {
+                row.style.border = '1px solid #edeaf3';
+            }
+            cardsToAdd.push(name);
+        });
+
+        if (hasError) {
+            modalMessage.textContent = '请选择所有卡牌！';
+            return;
+        }
+
+        const activeMode = timeModeGroup.querySelector('.time-mode-btn.active');
+        let recordTime;
+        if (activeMode && activeMode.dataset.mode === 'custom') {
+            const val = customTimeInput.value;
+            if (!val) {
+                modalMessage.textContent = '请选择自定义时间！';
+                return;
+            }
+            const d = new Date(val);
+            if (isNaN(d.getTime())) {
+                modalMessage.textContent = '无效的时间格式！';
+                return;
+            }
+            recordTime = d.toISOString();
+        } else {
+            recordTime = new Date().toISOString();
+        }
+
+        let currentGlobalIndex = getTotalPulls();
+
         cardsToAdd.forEach(name => {
-            globalIdx++;
+            currentGlobalIndex++;
             const existing = appData.cards.find(c => c.pool === pool && c.name === name);
             if (existing) {
-                existing.history.push({ time: recordTime, globalIndex: globalIdx });
+                existing.history.push({ time: recordTime, globalIndex: currentGlobalIndex });
                 existing.count = existing.history.length;
             } else {
                 appData.cards.push({
-                    id: Date.now() + Math.random().toString(36),
-                    pool, name,
-                    history: [{ time: recordTime, globalIndex: globalIdx }],
+                    id: genId(),
+                    pool: pool,
+                    name: name,
+                    history: [{ time: recordTime, globalIndex: currentGlobalIndex }],
                     count: 1
                 });
             }
         });
-        saveData();
-        hideModal('addModal');
-        render();
-        alert(`✅ 成功记录 ${cardsToAdd.length} 张卡牌！`);
-    };
 
-    // 清空
-    const clearAll = () => {
-        if (totalPulls() === 0) { alert('没有数据需要清空'); return; }
-        if (confirm('确定清空所有卡牌记录吗？')) {
-            appData.cards = [];
-            saveData();
-            render();
+        saveData(appData);
+        renderAll();
+        closeModal();
+        modalMessage.textContent = '';
+        alert(`✅ 成功记录 ${cardsToAdd.length} 张卡牌！\n⏰ 时间：${formatTime(recordTime)}`);
+    }
+
+    // ================================================================
+    //  清空
+    // ================================================================
+
+    function clearAllData() {
+        const total = getTotalPulls();
+        if (total === 0) {
+            alert('当前没有任何卡牌数据需要清空。');
+            return;
         }
-    };
+        if (confirm(`⚠️ 确定要清空所有 ${total} 张卡牌记录吗？此操作不可撤销！`)) {
+            appData.cards = [];
+            saveData(appData);
+            renderAll();
+            alert('✅ 已清空所有卡牌数据！');
+        }
+    }
 
-    // 初始化事件绑定
-    poolTabs.forEach(tab => tab.addEventListener('click', function() {
-        poolTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        currentView = this.dataset.pool;
-        render();
-    }));
+    // ================================================================
+    //  事件绑定
+    // ================================================================
 
-    document.getElementById('openAddModal').addEventListener('click', openAddModal);
-    document.getElementById('closeAddModalBtn').addEventListener('click', () => hideModal('addModal'));
-    document.getElementById('cancelAddBtn').addEventListener('click', () => hideModal('addModal'));
-    document.getElementById('addModal').addEventListener('click', e => { if (e.target.id==='addModal') hideModal('addModal'); });
-    document.getElementById('timeModeGroup').addEventListener('click', e => {
+    poolTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            poolTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            currentView = this.dataset.pool;
+            renderAll();
+        });
+    });
+
+    clearAllBtn.addEventListener('click', clearAllData);
+
+    openAddBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelModalBtn.addEventListener('click', closeModal);
+    addModal.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    timeModeGroup.addEventListener('click', function(e) {
         const btn = e.target.closest('.time-mode-btn');
-        if (btn) setTimeMode(btn.dataset.mode);
+        if (!btn) return;
+        setTimeMode(btn.dataset.mode);
     });
+
     modalPullCount.addEventListener('input', function() {
-        let v = parseInt(this.value) || 1;
-        if (v < 1) v = 1;
-        if (v > 99) v = 99;
-        this.value = v;
-        renderSlots(v);
+        let val = parseInt(this.value, 10);
+        if (isNaN(val) || val < 1) val = 1;
+        if (val > 99) val = 99;
+        this.value = val;
+        const pool = modalPool.value;
+        renderSlots(val, pool);
     });
-    document.getElementById('submitPull').addEventListener('click', submitPull);
 
-    // 详情弹窗关闭
-    document.getElementById('closeDetailBtn').addEventListener('click', () => hideModal('detailModal'));
-    document.getElementById('detailModal').addEventListener('click', e => { if (e.target.id==='detailModal') hideModal('detailModal'); });
+    submitPullBtn.addEventListener('click', submitPull);
 
-    // 分类弹窗关闭
-    document.getElementById('closeCategoryBtn').addEventListener('click', () => hideModal('categoryModal'));
-    document.getElementById('categoryModal').addEventListener('click', e => { if (e.target.id==='categoryModal') hideModal('categoryModal'); });
+    closeDetailBtn.addEventListener('click', closeDetail);
+    detailModal.addEventListener('click', function(e) {
+        if (e.target === this) closeDetail();
+    });
 
-    // 清空按钮
-    document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+    closeCategoryModalBtn.addEventListener('click', closeCategoryModal);
+    categoryModal.addEventListener('click', function(e) {
+        if (e.target === this) closeCategoryModal();
+    });
 
-    // 启动
-    loadData();
-    render();
-})();
+    // ================================================================
+    //  示例数据
+    // ================================================================
+
+    function initSampleData() {
+        if (appData.cards.length === 0) {
+            const now = new Date().toISOString();
+            const sampleCards = [
+                { pool: 'A', name: 'r1' },
+                { pool: 'A', name: 'r2' },
+                { pool: 'A', name: 'sr1' },
+                { pool: 'A', name: 'ssr1' },
+                { pool: 'A', name: 'sp1' },
+                { pool: 'A', name: 'ur1' },
+                { pool: 'B', name: 'ur1' },
+                { pool: 'B', name: 'r5' }
+            ];
+            let idx = 0;
+            sampleCards.forEach(item => {
+                idx++;
+                appData.cards.push({
+                    id: genId(),
+                    pool: item.pool,
+                    name: item.name,
+                    history: [{ time: now, globalIndex: idx }],
+                    count: 1
+                });
+            });
+            const r1 = appData.cards.find(c => c.name === 'r1' && c.pool === 'A');
+            if (r1) {
+                const t2 = new Date(Date.now() + 60000).toISOString();
+                r1.history.push({ time: t2, globalIndex: 2 });
+                const t3 = new Date(Date.now() + 120000).toISOString();
+                r1.history.push({ time: t3, globalIndex: 5 });
+                r1.history.push({ time: t3, globalIndex: 7 });
+                r1.count = 4;
+            }
+            saveData(appData);
+        }
+    }
+
+    // ================================================================
+    //  启动
+    // ================================================================
+
+    initSampleData();
+    appData = loadData();
+    renderAll();
+
+    console.log('🎉 10周年抽抽乐已启动！');
+    console.log(`📊 当前共有 ${getTotalPulls()} 张卡牌记录`);
 </script>
 </body>
 </html>
