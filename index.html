@@ -16,7 +16,7 @@
         /* === 玻璃效果统计面板 === */
         .stats-wrapper { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 20px; padding: 18px 24px; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
         .stats-row { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; }
-        .stat-card { background: rgba(255,255,255,0.75); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 16px; padding: 14px 8px; text-align: center; border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(91,163,217,0.12); }
+        .stat-card { background: rgba(255,255,255,0.75); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 16px; padding: 14px 8px; text-align: center; border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .stat-card .label { font-size: 14px; font-weight: 600; color: #888; }
         .stat-card .value { font-size: 30px; font-weight: 800; margin-top: 2px; }
         .stat-card .percent { font-size: 12px; color: #aaa; }
@@ -52,11 +52,15 @@
         .rarity-r .rarity-label { background: #e8f0fe; color: #4a6fa5; }
 
         .category-row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-start; }
-        .category-box { background: rgba(255,255,255,0.7); border: 2px solid #e0d6c2; border-radius: 16px; padding: 10px 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: fit-content; min-width: 130px; max-width: 320px; flex: 0 0 auto; }
+
+        /* === 分类框：明亮蓝色边框 === */
+        .category-box { background: rgba(255,255,255,0.7); border: 2px solid #a0d2f0; border-radius: 16px; padding: 10px 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: fit-content; min-width: 130px; max-width: 380px; flex: 0 0 auto; }
         .category-box .category-label { font-size: 16px; font-weight: 700; color: #5a4a3a; cursor: pointer; padding: 2px 10px; border-radius: 8px; background: rgba(255,255,255,0.6); white-space: nowrap; display: flex; flex-direction: column; align-items: center; line-height: 1.3; width: auto; }
         .category-label:hover { background: rgba(91,163,217,0.15); }
         .category-box .category-label .total-count { font-size: 12px; font-weight: 600; color: #8b7355; }
-        .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: flex-start; width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+        /* === 分类框内卡片单行滑动 === */
+        .category-box .card-grid { display: flex; flex-wrap: nowrap; gap: 8px 10px; justify-content: flex-start; width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
         .card-mini {
             width: 84px; flex: 0 0 84px; height: 72px; background: #fff; border-radius: 10px; padding: 6px 4px;
@@ -132,6 +136,7 @@
             .pool-section-title { font-size: 22px; }
             .card-mini { width: 78px; flex: 0 0 78px; height: 68px; padding: 5px 4px; }
             .card-mini .mini-id { font-size: 15px; }
+            .category-box { max-width: 320px; }
         }
         @media (max-width: 600px) {
             body { padding: 10px 12px; }
@@ -141,8 +146,8 @@
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
             .card-mini { width: 82px; flex: 0 0 82px; height: 78px; padding: 8px 6px; }
-            .card-mini .mini-id { font-size: 15px; }
-            .card-mini .mini-count { font-size: 11px; }
+            .card-mini .mini-id { font-size: 14px; }
+            .card-mini .mini-count { font-size: 10px; }
             .modal { padding: 14px; }
             .modal h2 { font-size: 18px; }
             .category-grid .cat-img { width: 150px; }
@@ -150,7 +155,7 @@
             .rarity-group { flex: 0 1 auto; min-width: auto; margin-bottom: 6px; }
             .rarity-label { font-size: 15px; padding: 4px 14px; border-radius: 16px; }
             .category-row { flex-wrap: wrap; }
-            .category-box { max-width: 280px; }
+            .category-box { max-width: 280px; border-color: #a0d2f0; }
             .slot-row select { max-width: 100px; min-width: 80px; font-size: 11px; }
             .slot-row input[type="text"] { max-width: 100px; min-width: 80px; font-size: 11px; }
             .pool-stats-mini { grid-template-columns: repeat(3,1fr); gap: 6px; }
@@ -159,9 +164,9 @@
         }
         @media (max-width: 400px) {
             .card-mini { width: 74px; flex: 0 0 74px; height: 72px; padding: 6px 5px; }
-            .card-mini .mini-id { font-size: 14px; }
-            .card-mini .mini-count { font-size: 10px; }
-            .category-box { max-width: 240px; }
+            .card-mini .mini-id { font-size: 13px; }
+            .card-mini .mini-count { font-size: 9px; }
+            .category-box { max-width: 240px; border-color: #a0d2f0; }
             .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
             .slot-row input[type="text"] { max-width: 85px; min-width: 70px; font-size: 10px; }
         }
@@ -244,7 +249,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v21';
+    const STORAGE_KEY = 'tenniversary_cards_v22';
 
     const CARD_CATEGORIES = {
         'R': [
