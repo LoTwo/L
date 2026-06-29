@@ -140,9 +140,9 @@
             .modal { padding: 14px; }
             .modal h2 { font-size: 18px; }
             .category-grid .cat-img { width: 150px; }
-            .rarity-groups-flow { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 8px 14px; padding-bottom: 8px; }
-            .rarity-group { flex: 0 0 auto; min-width: 260px; }
-            .category-row { flex-wrap: nowrap; }
+            .rarity-groups-flow { flex-wrap: wrap; gap: 10px 14px; }
+            .rarity-group { flex: 0 1 auto; min-width: auto; margin-bottom: 6px; }
+            .category-row { flex-wrap: wrap; }
             .slot-row select { max-width: 100px; min-width: 80px; font-size: 11px; }
             .slot-row input[type="text"] { max-width: 100px; min-width: 80px; font-size: 11px; }
             .pool-stats-mini { grid-template-columns: repeat(3,1fr); gap: 6px; }
@@ -233,7 +233,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v17';
+    const STORAGE_KEY = 'tenniversary_cards_v18';
 
     const CARD_CATEGORIES = {
         'R': [
