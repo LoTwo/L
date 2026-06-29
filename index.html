@@ -33,6 +33,13 @@
         .pool-section { margin-bottom: 28px; border-radius: 20px; padding: 20px; background: #fefef9; }
         .pool-section-title { font-size: 26px; font-weight: 800; color: #5a4a3a; padding-bottom: 6px; margin-bottom: 16px; border-bottom: none; }
 
+        .pool-stats-mini { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; margin-bottom: 20px; padding: 12px 16px; background: rgba(255,255,255,0.6); border-radius: 14px; }
+        .pool-stats-mini .stat-item { text-align: center; }
+        .pool-stats-mini .stat-item .label { font-size: 12px; font-weight: 600; color: #888; }
+        .pool-stats-mini .stat-item .value { font-size: 22px; font-weight: 800; }
+        .pool-stats-mini .stat-item .pct { font-size: 10px; color: #aaa; }
+        .pool-stats-mini .ur .value { color: #E91E63; } .pool-stats-mini .sp .value { color: #E74C3C; } .pool-stats-mini .ssr .value { color: #d4a017; } .pool-stats-mini .sr .value { color: #9B59B6; } .pool-stats-mini .r .value { color: #5B8DD9; } .pool-stats-mini .total .value { color: #5BA3D9; }
+
         .rarity-groups-flow { display: flex; flex-wrap: wrap; gap: 20px 28px; align-items: flex-start; }
         .rarity-group { flex: 0 1 auto; }
         .rarity-label { font-size: 18px; font-weight: 700; display: inline-block; margin-bottom: 8px; padding: 4px 18px; border-radius: 12px; background: #f5efe2; color: #5a4a3a; }
@@ -49,32 +56,20 @@
         .category-box .category-label .total-count { font-size: 12px; font-weight: 600; color: #8b7355; }
         .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; width: 100%; }
 
-                .card-mini {
-                    width: 84px;
-                    flex: 0 0 84px;
-                    height: 72px;
-                    background: #fff;
-                    border-radius: 10px;
-                    padding: 6px 4px;
-                    text-align: center;
-                    cursor: pointer;
-                    transition: all 0.15s;
-                    border: 2px solid;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    overflow: hidden;
-                }
-                .card-mini:active { transform: scale(0.95); }
-                .card-mini .mini-id { font-weight: 700; font-size: 16px; color: #333; white-space: nowrap; }
-                .card-mini .mini-count { font-size: 11px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-                .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
-                .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
-                .card-mini .owned-dot { display: inline-block; margin-left: 2px; font-size: 10px; color: #c9a87c; }
-                .card-mini.rarity-ur { border-color: #E91E63; } .card-mini.rarity-sp { border-color: #E74C3C; } .card-mini.rarity-ssr { border-color: #d4a017; } .card-mini.rarity-sr { border-color: #9B59B6; } .card-mini.rarity-r { border-color: #5B8DD9; }
-                .card-mini.unowned { border-color: #ddd !important; }
-                .card-mini.rarity-ur.owned { background: #ffe6ec; } .card-mini.rarity-sp.owned { background: #ffeaea; } .card-mini.rarity-ssr.owned { background: #fef6e0; } .card-mini.rarity-sr.owned { background: #f3e8f7; } .card-mini.rarity-r.owned { background: #e8f0fe; }
+        .card-mini {
+            width: 84px; flex: 0 0 84px; height: 72px; background: #fff; border-radius: 10px; padding: 6px 4px;
+            text-align: center; cursor: pointer; transition: all 0.15s; border: 2px solid;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .card-mini:active { transform: scale(0.95); }
+        .card-mini .mini-id { font-weight: 700; font-size: 16px; color: #333; white-space: nowrap; }
+        .card-mini .mini-count { font-size: 11px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+        .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
+        .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
+        .card-mini .owned-dot { display: inline-block; margin-left: 2px; font-size: 10px; color: #c9a87c; }
+        .card-mini.rarity-ur { border-color: #E91E63; } .card-mini.rarity-sp { border-color: #E74C3C; } .card-mini.rarity-ssr { border-color: #d4a017; } .card-mini.rarity-sr { border-color: #9B59B6; } .card-mini.rarity-r { border-color: #5B8DD9; }
+        .card-mini.unowned { border-color: #ddd !important; }
+        .card-mini.rarity-ur.owned { background: #ffe6ec; } .card-mini.rarity-sp.owned { background: #ffeaea; } .card-mini.rarity-ssr.owned { background: #fef6e0; } .card-mini.rarity-sr.owned { background: #f3e8f7; } .card-mini.rarity-r.owned { background: #e8f0fe; }
 
         .empty-state { text-align: center; padding: 40px 20px; color: #ccc; font-size: 18px; }
 
@@ -96,6 +91,9 @@
         .slot-row .slot-index { font-weight: 700; color: #888; min-width: 34px; font-size: 13px; }
         .slot-row select { flex: 0 1 auto; width: auto; min-width: 100px; max-width: 140px; padding: 6px 8px; border-radius: 8px; border: 2px solid #e0dceb; font-size: 13px; background: #fff; outline: none; }
         .slot-row select:focus { border-color: #5BA3D9; }
+        .slot-row .or-text { font-size: 12px; color: #999; }
+        .slot-row input[type="text"] { flex: 0 1 auto; width: auto; min-width: 100px; max-width: 140px; padding: 6px 8px; border-radius: 8px; border: 2px solid #e0dceb; font-size: 13px; background: #fff; outline: none; }
+        .slot-row input[type="text"]:focus { border-color: #5BA3D9; }
         .modal .btn-group { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
         .modal .btn-group .btn { flex: 1 1 auto; justify-content: center; }
         #modalMessage { margin-top: 10px; color: #e74c3c; font-size: 13px; font-weight: 600; }
@@ -125,7 +123,7 @@
             .main-title { font-size: 32px; }
             .pool-tab { font-size: 15px; padding: 8px 20px; }
             .pool-section-title { font-size: 22px; }
-            .card-mini { width: 78px; flex: 0 0 78px; padding: 6px 6px; }
+            .card-mini { width: 78px; flex: 0 0 78px; height: 68px; padding: 5px 4px; }
             .card-mini .mini-id { font-size: 15px; }
         }
         @media (max-width: 600px) {
@@ -135,19 +133,22 @@
             .main-title { font-size: 26px; }
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 68px; flex: 0 0 68px; padding: 5px 4px; }
+            .card-mini { width: 68px; flex: 0 0 68px; height: 60px; padding: 4px 3px; }
             .card-mini .mini-id { font-size: 14px; }
             .modal { padding: 14px; }
             .modal h2 { font-size: 18px; }
             .category-grid .cat-img { width: 150px; }
             .rarity-groups-flow { flex-wrap: nowrap; overflow-x: auto; gap: 12px 20px; padding-bottom: 8px; }
             .rarity-group { flex: 0 0 auto; min-width: 260px; }
-            .slot-row select { max-width: 110px; min-width: 90px; font-size: 12px; }
+            .slot-row select { max-width: 100px; min-width: 80px; font-size: 11px; }
+            .slot-row input[type="text"] { max-width: 100px; min-width: 80px; font-size: 11px; }
+            .pool-stats-mini { grid-template-columns: repeat(3,1fr); gap: 6px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 60px; flex: 0 0 60px; padding: 4px 3px; }
+            .card-mini { width: 60px; flex: 0 0 60px; height: 54px; padding: 3px 2px; }
             .card-mini .mini-id { font-size: 13px; }
-            .slot-row select { max-width: 95px; min-width: 80px; font-size: 11px; }
+            .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
+            .slot-row input[type="text"] { max-width: 85px; min-width: 70px; font-size: 10px; }
         }
         .slot-list::-webkit-scrollbar { width: 4px; }
         .slot-list::-webkit-scrollbar-thumb { background: #d5cee8; border-radius: 8px; }
@@ -199,7 +200,7 @@
                 </div>
                 <input type="datetime-local" id="customTimeInput" style="display:none; margin-top:6px;" />
             </div>
-            <div class="form-group"><label>每一抽的卡牌</label><div class="slot-list" id="slotList"></div></div>
+            <div class="form-group"><label>每一抽的卡牌（下拉选取或手动输入，每行填一个）</label><div class="slot-list" id="slotList"></div></div>
             <div class="btn-group">
                 <button class="btn btn-primary" id="submitPull">✅ 确认添加</button>
                 <button class="btn btn-danger" id="cancelAddBtn">取消</button>
@@ -228,7 +229,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v13';
+    const STORAGE_KEY = 'tenniversary_cards_v15';
 
     const CARD_CATEGORIES = {
         'R': [
@@ -270,24 +271,32 @@
     };
     const RARITY_ORDER = { 'UR':0, 'SP':1, 'SSR':2, 'SR':3, 'R':4 };
 
+    const ALL_VALID_IDS = new Set();
+    (() => {
+        Object.values(CARD_CATEGORIES).forEach(cats => cats.forEach(c => c.ids.forEach(id => ALL_VALID_IDS.add(id))));
+        for (let i=1; i<=5; i++) ALL_VALID_IDS.add('ur'+i);
+    })();
+
     const getRarity = id => {
-        if (id.startsWith('ur')) return 'UR';
+        const lower = id.toLowerCase();
+        if (lower.startsWith('ur')) return 'UR';
         for (const [r, cats] of Object.entries(CARD_CATEGORIES)) {
-            if (cats.some(c => c.ids.includes(id))) return r;
+            if (cats.some(c => c.ids.includes(lower))) return r;
         }
-        return 'R';
+        return null;
     };
     const getCategory = (id, pool) => {
-        if (id.startsWith('ur')) {
+        const lower = id.toLowerCase();
+        if (lower.startsWith('ur')) {
             const arr = UR_CATEGORIES[pool] || [];
-            const found = arr.find(c => c.ids.includes(id));
+            const found = arr.find(c => c.ids.includes(lower));
             return found ? found.category : 'UR';
         }
         for (const cats of Object.values(CARD_CATEGORIES)) {
-            const found = cats.find(c => c.ids.includes(id));
+            const found = cats.find(c => c.ids.includes(lower));
             if (found) return found.category;
         }
-        return id;
+        return lower;
     };
     const getCardImg = (pool, id) => `./images/${pool}_${id}.png`;
     const getCatImg = (pool, id) => {
@@ -330,7 +339,7 @@
         let total = 0;
         appData.cards.forEach(c => {
             const r = getRarity(c.name);
-            if (counts.hasOwnProperty(r)) counts[r] += c.history.length;
+            if (r && counts.hasOwnProperty(r)) counts[r] += c.history.length;
             total += c.history.length;
         });
         $('#statTotal').textContent = total;
@@ -348,11 +357,23 @@
         $('#statRPct').textContent = pct(counts.R);
     };
 
+    const calcPoolStats = (poolCards) => {
+        const counts = { UR:0, SP:0, SSR:0, SR:0, R:0 };
+        let total = 0;
+        poolCards.forEach(c => {
+            const r = getRarity(c.name);
+            if (r && counts.hasOwnProperty(r)) counts[r] += c.history.length;
+            total += c.history.length;
+        });
+        const pct = n => total ? Math.round(n/total*100)+'%' : '0%';
+        return { total, counts, pct };
+    };
+
     const showModal = id => document.getElementById(id).classList.add('active');
     const hideModal = id => document.getElementById(id).classList.remove('active');
 
     const showDetail = (pool, id, card) => {
-        const rarity = getRarity(id);
+        const rarity = getRarity(id) || '未知';
         document.getElementById('detailImage').src = getCardImg(pool, id);
         document.getElementById('detailName').textContent = `${pool}池 · ${id}`;
         document.getElementById('detailRarity').textContent = `稀有度：${rarity} ｜ ${card ? '共抽到 '+card.history.length+' 次' : '尚未抽到'}`;
@@ -415,7 +436,6 @@
         html += `</div></div>`;
         return html;
     };
-
     const renderRaritySimple = (rarity, pool, poolCards) => {
         const cats = rarity === 'UR' ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
         if (!cats) return '';
@@ -433,6 +453,19 @@
         html += `</div></div>`;
         return html;
     };
+
+    const renderPoolStatsMini = (poolCards) => {
+        const { total, counts, pct } = calcPoolStats(poolCards);
+        return `<div class="pool-stats-mini">
+            <div class="stat-item total"><div class="label">总抽数</div><div class="value">${total}</div><div class="pct">100%</div></div>
+            <div class="stat-item ur"><div class="label">UR</div><div class="value">${counts.UR}</div><div class="pct">${pct(counts.UR)}</div></div>
+            <div class="stat-item sp"><div class="label">SP</div><div class="value">${counts.SP}</div><div class="pct">${pct(counts.SP)}</div></div>
+            <div class="stat-item ssr"><div class="label">SSR</div><div class="value">${counts.SSR}</div><div class="pct">${pct(counts.SSR)}</div></div>
+            <div class="stat-item sr"><div class="label">SR</div><div class="value">${counts.SR}</div><div class="pct">${pct(counts.SR)}</div></div>
+            <div class="stat-item r"><div class="label">R</div><div class="value">${counts.R}</div><div class="pct">${pct(counts.R)}</div></div>
+        </div>`;
+    };
+
     const bindEvents = (hasCategories) => {
         document.querySelectorAll('.card-mini').forEach(el => {
             el.addEventListener('click', function() {
@@ -479,6 +512,7 @@
             }
             const label = currentView === 'A' ? 'A卡池-兔兔池' : 'B卡池-猫猫池';
             let html = `<div class="pool-section"><div class="pool-section-title">${label}</div>`;
+            html += renderPoolStatsMini(poolCards);
             html += renderRaritySimple('UR', currentView, poolCards);
             const sorted = Object.keys(CARD_CATEGORIES).sort((a,b) => RARITY_ORDER[a] - RARITY_ORDER[b]);
             html += `<div class="rarity-groups-flow">${sorted.map(r => renderRaritySimple(r, currentView, poolCards)).join('')}</div>`;
@@ -491,17 +525,32 @@
     const slotList = $('#slotList');
     const modalPullCount = $('#modalPullCount');
     const modalPool = $('#modalPool');
-    const allCardIds = (() => {
+
+    const allCardIdsSorted = (() => {
         const ids = [];
         Object.values(CARD_CATEGORIES).forEach(cats => cats.forEach(c => ids.push(...c.ids)));
         for (let i=1; i<=5; i++) ids.push('ur'+i);
-        return ids.sort();
+        const prefixOrder = { 'r':1, 'sr':2, 'ssr':3, 'sp':4, 'ur':5 };
+        return ids.sort((a,b) => {
+            const pa = a.match(/[a-z]+/)[0], pb = b.match(/[a-z]+/)[0];
+            const na = parseInt(a.match(/\d+/)[0]), nb = parseInt(b.match(/\d+/)[0]);
+            if (prefixOrder[pa] !== prefixOrder[pb]) return prefixOrder[pa] - prefixOrder[pb];
+            return na - nb;
+        });
     })();
 
     const renderSlots = (count) => {
         let html = '';
         for (let i=0; i<count; i++) {
-            html += `<div class="slot-row"><span class="slot-index">#${i+1}</span><select class="slot-card">${allCardIds.map(id => `<option value="${id}">${id}</option>`).join('')}</select></div>`;
+            html += `<div class="slot-row">
+                <span class="slot-index">#${i+1}</span>
+                <select class="slot-select">
+                    <option value="">-- 选取 --</option>
+                    ${allCardIdsSorted.map(id => `<option value="${id}">${id}</option>`).join('')}
+                </select>
+                <span class="or-text">或</span>
+                <input type="text" class="slot-input" placeholder="手动输入编号" />
+            </div>`;
         }
         slotList.innerHTML = html;
     };
@@ -528,19 +577,35 @@
 
     const submitPull = () => {
         const pool = modalPool.value;
-        const rows = document.querySelectorAll('.slot-card');
+        const rows = document.querySelectorAll('.slot-row');
         const cardsToAdd = [];
         let hasError = false;
-        rows.forEach(sel => {
-            if (!sel.value) hasError = true;
-            else cardsToAdd.push(sel.value);
+        let errorMsg = '';
+        rows.forEach(row => {
+            const select = row.querySelector('.slot-select');
+            const input = row.querySelector('.slot-input');
+            const selectVal = select.value;
+            const inputVal = input.value.trim();
+            let raw = selectVal || inputVal;
+            if (!raw) {
+                hasError = true;
+                errorMsg = '每行请选择或输入一个卡牌编号！';
+                return;
+            }
+            const lower = raw.toLowerCase();
+            if (!ALL_VALID_IDS.has(lower)) {
+                hasError = true;
+                errorMsg = `"${raw}" 不是有效的卡牌编号！有效编号：r1~r12、sr1~sr11、ssr1~ssr8、sp1~sp6、ur1~ur5`;
+                return;
+            }
+            cardsToAdd.push(lower);
         });
-        if (cardsToAdd.length === 0) {
-            document.getElementById('modalMessage').textContent = '请至少选择一张卡牌！';
+        if (cardsToAdd.length === 0 && !hasError) {
+            document.getElementById('modalMessage').textContent = '请至少选择或填写一张卡牌编号！';
             return;
         }
         if (hasError) {
-            document.getElementById('modalMessage').textContent = '请选择所有卡牌！';
+            document.getElementById('modalMessage').textContent = errorMsg;
             return;
         }
         const timeMode = document.querySelector('.time-mode-btn.active').dataset.mode;
@@ -569,8 +634,10 @@
         saveData();
         hideModal('addModal');
         render();
-        alert(`✅ 成功记录 ${cardsToAdd.length} 张卡牌！`);
+        alert(`✅ 成功记录 ${cardsToAdd.length} 张卡牌！\n⏰ 时间：${formatTime(recordTime)}`);
     };
+
+    const formatTime = iso => new Date(iso).toLocaleString('zh-CN', { hour12: false });
 
     const clearAll = () => {
         if (totalPulls() === 0) { alert('没有数据需要清空'); return; }
