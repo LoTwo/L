@@ -33,14 +33,7 @@
         .pool-section { margin-bottom: 28px; border-radius: 20px; padding: 20px; background: #fefef9; }
         .pool-section-title { font-size: 26px; font-weight: 800; color: #5a4a3a; padding-bottom: 6px; margin-bottom: 16px; border-bottom: none; }
 
-        /* 稀有度横向滑动容器 – 手机端可滑动 */
-        .rarity-groups-flow {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px 28px;
-            align-items: flex-start;
-        }
-
+        .rarity-groups-flow { display: flex; flex-wrap: wrap; gap: 20px 28px; align-items: flex-start; }
         .rarity-group { flex: 0 1 auto; }
         .rarity-label { font-size: 18px; font-weight: 700; display: inline-block; margin-bottom: 8px; padding: 4px 18px; border-radius: 12px; background: #f5efe2; color: #5a4a3a; }
         .rarity-ur .rarity-label { background: #fce4ec; color: #b34159; }
@@ -88,19 +81,7 @@
         .slot-list { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 14px; max-height: 300px; overflow-y: auto; padding-right: 4px; }
         .slot-row { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; background: #f8f6fc; padding: 8px 12px; border-radius: 12px; border: 1px solid #edeaf3; }
         .slot-row .slot-index { font-weight: 700; color: #888; min-width: 34px; font-size: 13px; }
-        /* 选择框宽度自适应，不再强制拉满 */
-        .slot-row select {
-            flex: 0 1 auto;
-            width: auto;
-            min-width: 110px;
-            max-width: 160px;
-            padding: 6px 10px;
-            border-radius: 8px;
-            border: 2px solid #e0dceb;
-            font-size: 13px;
-            background: #fff;
-            outline: none;
-        }
+        .slot-row select { flex: 0 1 auto; width: auto; min-width: 100px; max-width: 140px; padding: 6px 8px; border-radius: 8px; border: 2px solid #e0dceb; font-size: 13px; background: #fff; outline: none; }
         .slot-row select:focus { border-color: #5BA3D9; }
         .modal .btn-group { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
         .modal .btn-group .btn { flex: 1 1 auto; justify-content: center; }
@@ -125,7 +106,15 @@
         .category-grid .cat-img { width: 200px; max-width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; background: #f0ecf7; border: 1px solid #edeaf3; }
         .category-grid .cat-label { font-size: 14px; text-align: center; font-weight: 600; color: #555; margin-top: 4px; }
 
-        /* ===== 手机端优化 ===== */
+        @media (max-width: 900px) {
+            body { padding: 14px 16px; }
+            .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
+            .main-title { font-size: 32px; }
+            .pool-tab { font-size: 15px; padding: 8px 20px; }
+            .pool-section-title { font-size: 22px; }
+            .card-mini { width: 78px; flex: 0 0 78px; padding: 6px 6px; }
+            .card-mini .mini-id { font-size: 15px; }
+        }
         @media (max-width: 600px) {
             body { padding: 10px 12px; }
             .stats-row { grid-template-columns: repeat(2,1fr); gap: 6px; }
@@ -138,24 +127,14 @@
             .modal { padding: 14px; }
             .modal h2 { font-size: 18px; }
             .category-grid .cat-img { width: 150px; }
-
-            /* 稀有度区块在手机上横向滑动，不换行 */
-            .rarity-groups-flow {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                gap: 12px 20px;
-                padding-bottom: 8px;
-            }
-            .rarity-group {
-                flex: 0 0 auto;   /* 不缩放，保持宽度 */
-                min-width: 260px;  /* 最小宽度保证内部卡片能完整显示 */
-            }
+            .rarity-groups-flow { flex-wrap: nowrap; overflow-x: auto; gap: 12px 20px; padding-bottom: 8px; }
+            .rarity-group { flex: 0 0 auto; min-width: 260px; }
+            .slot-row select { max-width: 110px; min-width: 90px; font-size: 12px; }
         }
-
         @media (max-width: 400px) {
             .card-mini { width: 60px; flex: 0 0 60px; padding: 4px 3px; }
             .card-mini .mini-id { font-size: 13px; }
+            .slot-row select { max-width: 95px; min-width: 80px; font-size: 11px; }
         }
         .slot-list::-webkit-scrollbar { width: 4px; }
         .slot-list::-webkit-scrollbar-thumb { background: #d5cee8; border-radius: 8px; }
@@ -195,7 +174,6 @@
         <button class="btn btn-danger" id="clearAllBtn">🗑️ 清空所有卡牌</button>
     </div>
 
-    <!-- 新增抽卡弹窗 -->
     <div class="modal-overlay" id="addModal">
         <div class="modal">
             <h2>📥 新增抽卡记录 <button class="close-btn" id="closeAddModalBtn">✕</button></h2>
@@ -217,7 +195,6 @@
         </div>
     </div>
 
-    <!-- 卡牌详情弹窗 -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
             <button class="close-btn" id="closeDetailBtn">✕</button>
@@ -228,7 +205,6 @@
         </div>
     </div>
 
-    <!-- 分类照片弹窗 -->
     <div class="modal-overlay" id="categoryModal">
         <div class="modal" style="max-width:520px;">
             <h2>📸 <span id="categoryModalTitle">分类名称</span><button class="close-btn" id="closeCategoryBtn">✕</button></h2>
@@ -239,9 +215,8 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v12';
+    const STORAGE_KEY = 'tenniversary_cards_v13';
 
-    // 数据定义
     const CARD_CATEGORIES = {
         'R': [
             { category: '写真卡', ids: ['r1','r2','r3','r4'] },
@@ -282,7 +257,6 @@
     };
     const RARITY_ORDER = { 'UR':0, 'SP':1, 'SSR':2, 'SR':3, 'R':4 };
 
-    // 工具函数
     const getRarity = id => {
         if (id.startsWith('ur')) return 'UR';
         for (const [r, cats] of Object.entries(CARD_CATEGORIES)) {
@@ -308,7 +282,6 @@
         return `./images/${pool}_${getCategory(id, pool)}.png`;
     };
 
-    // 数据加载
     let appData = { cards: [] };
     let currentView = 'all';
 
@@ -329,22 +302,16 @@
                     return;
                 }
             }
-        } catch (e) { console.warn('数据读取失败，已重置'); }
+        } catch (e) {}
         appData = { cards: [] };
     };
     const saveData = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
     const totalPulls = () => appData.cards.reduce((sum, c) => sum + c.history.length, 0);
 
-    // DOM 元素
     const $ = s => document.querySelector(s);
     const poolTabs = document.querySelectorAll('.pool-tab');
     const cardList = $('#cardList');
-    const stats = {
-        total: $('#statTotal'), ur: $('#statUR'), sp: $('#statSP'), ssr: $('#statSSR'), sr: $('#statSR'), r: $('#statR'),
-        totalPct: $('#statTotalPct'), urPct: $('#statURPct'), spPct: $('#statSPPct'), ssrPct: $('#statSSRPct'), srPct: $('#statSRPct'), rPct: $('#statRPct')
-    };
 
-    // 渲染统计
     const renderStats = () => {
         const counts = { UR:0, SP:0, SSR:0, SR:0, R:0 };
         let total = 0;
@@ -353,26 +320,24 @@
             if (counts.hasOwnProperty(r)) counts[r] += c.history.length;
             total += c.history.length;
         });
-        stats.total.textContent = total;
-        stats.ur.textContent = counts.UR;
-        stats.sp.textContent = counts.SP;
-        stats.ssr.textContent = counts.SSR;
-        stats.sr.textContent = counts.SR;
-        stats.r.textContent = counts.R;
+        $('#statTotal').textContent = total;
+        $('#statUR').textContent = counts.UR;
+        $('#statSP').textContent = counts.SP;
+        $('#statSSR').textContent = counts.SSR;
+        $('#statSR').textContent = counts.SR;
+        $('#statR').textContent = counts.R;
         const pct = n => total ? Math.round(n/total*100)+'%' : '0%';
-        stats.totalPct.textContent = '100%';
-        stats.urPct.textContent = pct(counts.UR);
-        stats.spPct.textContent = pct(counts.SP);
-        stats.ssrPct.textContent = pct(counts.SSR);
-        stats.srPct.textContent = pct(counts.SR);
-        stats.rPct.textContent = pct(counts.R);
+        $('#statTotalPct').textContent = '100%';
+        $('#statURPct').textContent = pct(counts.UR);
+        $('#statSPPct').textContent = pct(counts.SP);
+        $('#statSSRPct').textContent = pct(counts.SSR);
+        $('#statSRPct').textContent = pct(counts.SR);
+        $('#statRPct').textContent = pct(counts.R);
     };
 
-    // 弹窗控制
     const showModal = id => document.getElementById(id).classList.add('active');
     const hideModal = id => document.getElementById(id).classList.remove('active');
 
-    // 详情弹窗
     const showDetail = (pool, id, card) => {
         const rarity = getRarity(id);
         document.getElementById('detailImage').src = getCardImg(pool, id);
@@ -399,7 +364,6 @@
         showModal('detailModal');
     };
 
-    // 分类照片弹窗
     const showCatPhotos = (category, ids, pool) => {
         document.getElementById('categoryModalTitle').textContent = `${pool}池 · ${category}`;
         const imgSrc = getCatImg(pool, ids[0]);
@@ -413,9 +377,8 @@
         showModal('categoryModal');
     };
 
-    // 构建单个稀有度区块（带分类标签，用于全部视图）
     const renderRarityWithCats = (rarity, pool, poolCards) => {
-        const cats = rarity.startsWith('ur') ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
+        const cats = rarity === 'UR' ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
         if (!cats) return '';
         let html = `<div class="rarity-group rarity-${rarity.toLowerCase()}"><div class="rarity-label">${rarity}</div><div class="category-row">`;
         cats.forEach(cat => {
@@ -440,25 +403,23 @@
         return html;
     };
 
-    // 构建单个稀有度区块（无分类标签，用于单卡池视图）
     const renderRaritySimple = (rarity, pool, poolCards) => {
-        const cats = rarity.startsWith('ur') ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
+        const cats = rarity === 'UR' ? UR_CATEGORIES[pool] : CARD_CATEGORIES[rarity];
         if (!cats) return '';
         const allIds = [];
         cats.forEach(c => allIds.push(...c.ids));
         allIds.sort();
+        const ownedIds = allIds.filter(id => poolCards.some(c => c.name === id && c.history.length > 0));
+        if (ownedIds.length === 0) return '';
         let html = `<div class="rarity-group rarity-${rarity.toLowerCase()}"><div class="rarity-label">${rarity}</div><div class="category-row">`;
-        allIds.forEach(id => {
+        ownedIds.forEach(id => {
             const card = poolCards.find(c => c.name === id);
             const count = card ? card.history.length : 0;
-            const isOwned = count > 0;
-            html += `<div class="card-mini ${isOwned ? 'rarity-'+rarity.toLowerCase()+' owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div>${isOwned ? '<span class="owned-dot">●</span>' : ''}</div>`;
+            html += `<div class="card-mini rarity-${rarity.toLowerCase()} owned" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">拥有 <span>${count}</span> 张</div><span class="owned-dot">●</span></div>`;
         });
         html += `</div></div>`;
         return html;
     };
-
-    // 绑定事件
     const bindEvents = (hasCategories) => {
         document.querySelectorAll('.card-mini').forEach(el => {
             el.addEventListener('click', function() {
@@ -481,7 +442,6 @@
         }
     };
 
-    // 主渲染
     const render = () => {
         renderStats();
         if (currentView === 'all') {
@@ -515,7 +475,6 @@
         }
     };
 
-    // 新增抽卡弹窗相关
     const slotList = $('#slotList');
     const modalPullCount = $('#modalPullCount');
     const modalPool = $('#modalPool');
@@ -600,7 +559,6 @@
         alert(`✅ 成功记录 ${cardsToAdd.length} 张卡牌！`);
     };
 
-    // 清空
     const clearAll = () => {
         if (totalPulls() === 0) { alert('没有数据需要清空'); return; }
         if (confirm('确定清空所有卡牌记录吗？')) {
@@ -610,7 +568,6 @@
         }
     };
 
-    // 初始化事件绑定
     poolTabs.forEach(tab => tab.addEventListener('click', function() {
         poolTabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
@@ -635,18 +592,14 @@
     });
     document.getElementById('submitPull').addEventListener('click', submitPull);
 
-    // 详情弹窗关闭
     document.getElementById('closeDetailBtn').addEventListener('click', () => hideModal('detailModal'));
     document.getElementById('detailModal').addEventListener('click', e => { if (e.target.id==='detailModal') hideModal('detailModal'); });
 
-    // 分类弹窗关闭
     document.getElementById('closeCategoryBtn').addEventListener('click', () => hideModal('categoryModal'));
     document.getElementById('categoryModal').addEventListener('click', e => { if (e.target.id==='categoryModal') hideModal('categoryModal'); });
 
-    // 清空按钮
     document.getElementById('clearAllBtn').addEventListener('click', clearAll);
 
-    // 启动
     loadData();
     render();
 })();
