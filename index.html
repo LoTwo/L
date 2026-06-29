@@ -49,19 +49,32 @@
         .category-box .category-label .total-count { font-size: 12px; font-weight: 600; color: #8b7355; }
         .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; width: 100%; }
 
-        .card-mini {
-            width: 90px; flex: 0 0 90px; background: #fff; border-radius: 10px; padding: 8px 8px; text-align: center;
-            cursor: pointer; transition: all 0.15s; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
-        }
-        .card-mini:active { transform: scale(0.95); }
-        .card-mini .mini-id { font-weight: 700; font-size: 17px; color: #333; white-space: nowrap; }
-        .card-mini .mini-count { font-size: 11px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-        .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
-        .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
-        .card-mini .owned-dot { display: inline-block; margin-left: 2px; font-size: 10px; color: #c9a87c; }
-        .card-mini.rarity-ur { border-color: #E91E63; } .card-mini.rarity-sp { border-color: #E74C3C; } .card-mini.rarity-ssr { border-color: #d4a017; } .card-mini.rarity-sr { border-color: #9B59B6; } .card-mini.rarity-r { border-color: #5B8DD9; }
-        .card-mini.unowned { border-color: #ddd !important; }
-        .card-mini.rarity-ur.owned { background: #ffe6ec; } .card-mini.rarity-sp.owned { background: #ffeaea; } .card-mini.rarity-ssr.owned { background: #fef6e0; } .card-mini.rarity-sr.owned { background: #f3e8f7; } .card-mini.rarity-r.owned { background: #e8f0fe; }
+                .card-mini {
+                    width: 84px;
+                    flex: 0 0 84px;
+                    height: 72px;
+                    background: #fff;
+                    border-radius: 10px;
+                    padding: 6px 4px;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.15s;
+                    border: 2px solid;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+                .card-mini:active { transform: scale(0.95); }
+                .card-mini .mini-id { font-weight: 700; font-size: 16px; color: #333; white-space: nowrap; }
+                .card-mini .mini-count { font-size: 11px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+                .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
+                .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
+                .card-mini .owned-dot { display: inline-block; margin-left: 2px; font-size: 10px; color: #c9a87c; }
+                .card-mini.rarity-ur { border-color: #E91E63; } .card-mini.rarity-sp { border-color: #E74C3C; } .card-mini.rarity-ssr { border-color: #d4a017; } .card-mini.rarity-sr { border-color: #9B59B6; } .card-mini.rarity-r { border-color: #5B8DD9; }
+                .card-mini.unowned { border-color: #ddd !important; }
+                .card-mini.rarity-ur.owned { background: #ffe6ec; } .card-mini.rarity-sp.owned { background: #ffeaea; } .card-mini.rarity-ssr.owned { background: #fef6e0; } .card-mini.rarity-sr.owned { background: #f3e8f7; } .card-mini.rarity-r.owned { background: #e8f0fe; }
 
         .empty-state { text-align: center; padding: 40px 20px; color: #ccc; font-size: 18px; }
 
