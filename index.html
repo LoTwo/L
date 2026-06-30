@@ -115,10 +115,12 @@
         #detailHistory { margin-top: 10px; text-align: left; font-size: 13px; color: #555; max-height: 180px; overflow-y: auto; background: #f8f6fc; padding: 8px 12px; border-radius: 10px; border: 1px solid #edeaf3; }
         .batch-group { margin-bottom: 4px; border-bottom: 1px dashed #ddd; padding-bottom: 3px; }
         .batch-group:last-child { border-bottom: none; margin-bottom: 0; }
-        .batch-title { font-weight: 700; color: #5BA3D9; font-size: 13px; }
+        .batch-title { font-weight: 700; color: #5BA3D9; font-size: 13px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
         .batch-time { font-size: 11px; color: #999; }
         .batch-index-list { font-size: 12px; color: #555; padding-left: 4px; }
         .batch-index-list .idx-item { display: inline-block; margin-right: 4px; background: rgba(91,163,217,0.08); padding: 0 6px; border-radius: 4px; }
+        .batch-delete-btn { padding: 2px 10px !important; font-size: 11px !important; margin-left: 8px; background: #fff; border: 1px solid #e0d6c2; color: #c0392b; border-radius: 12px; cursor: pointer; }
+        .batch-delete-btn:hover { background: #fef6f5; }
 
         .footer-actions { margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #edeaf3; padding-top: 14px; flex-wrap: wrap; }
 
@@ -254,7 +256,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v29';
+    const STORAGE_KEY = 'tenniversary_cards_v30';
 
     const CARD_CATEGORIES = {
         'R': [
@@ -397,6 +399,19 @@
     const showModal = id => document.getElementById(id).classList.add('active');
     const hideModal = id => document.getElementById(id).classList.remove('active');
 
+    const deleteBatch = (pool, id, time) => {
+        const card = appData.cards.find(c => c.pool === pool && c.name === id);
+        if (!card) return;
+        card.history = card.history.filter(h => h.time !== time);
+        card.count = card.history.length;
+        if (card.count === 0) {
+            appData.cards = appData.cards.filter(c => c !== card);
+        }
+        saveData();
+        hideModal('detailModal');
+        render();
+    };
+
     const showDetail = (pool, id, card) => {
         const rarity = getRarity(id) || '未知';
         document.getElementById('detailImage').src = getCardImg(pool, id);
@@ -414,9 +429,27 @@
             keys.forEach((key, i) => {
                 const g = groups[key];
                 g.indices.sort((a,b)=>a-b);
-                html += `<div class="batch-group"><div class="batch-title">第 ${i+1} 批</div><div class="batch-time">⏰ ${new Date(key).toLocaleString('zh-CN')}</div><div class="batch-index-list">${g.indices.map(idx => `<span class="idx-item">第${idx}抽</span>`).join('')}</div></div>`;
+                html += `<div class="batch-group">
+                    <div class="batch-title">第 ${i+1} 批 <button class="btn batch-delete-btn" data-pool="${pool}" data-id="${id}" data-time="${key}">删除此批</button></div>
+                    <div class="batch-time">⏰ ${new Date(key).toLocaleString('zh-CN')}</div>
+                    <div class="batch-index-list">${g.indices.map(idx => `<span class="idx-item">第${idx}抽</span>`).join('')}</div>
+                </div>`;
             });
             historyDiv.innerHTML = html;
+            // 绑定批次删除按钮
+            setTimeout(() => {
+                document.querySelectorAll('.batch-delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const p = this.dataset.pool;
+                        const i = this.dataset.id;
+                        const t = this.dataset.time;
+                        if (confirm(`确定要删除这一批抽卡记录吗？`)) {
+                            deleteBatch(p, i, t);
+                        }
+                    });
+                });
+            }, 0);
         } else {
             historyDiv.innerHTML = '<div style="color:#999;">还没有抽到这张卡</div>';
         }
@@ -698,7 +731,7 @@
 
     const clearAll = () => {
         if (totalPulls() === 0) { alert('没有数据需要清空'); return; }
-        if (confirm('确定清空所有卡牌记录吗？')) {
+        if (confirm('确定清空所有卡牌记录吗？此操作不可撤销！')) {
             appData.cards = [];
             saveData();
             render();
