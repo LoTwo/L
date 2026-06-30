@@ -31,7 +31,9 @@
         .btn-danger { background: #fff; border: 2px solid #f0e6ed; color: #c0392b; }
         .btn-danger:hover { background: #fef6f5; }
 
-        .pool-section { margin-bottom: 28px; border-radius: 20px; padding: 20px; background: #fefef9; }
+        .all-pools-row { display: flex; flex-wrap: wrap; gap: 24px; }
+        .all-pools-row .pool-section { flex: 1 1 400px; min-width: 0; }
+        .pool-section { margin-bottom: 28px; border-radius: 20px; padding: 20px; background: #fefef9; overflow: hidden; }
         .pool-section-title { font-size: 26px; font-weight: 800; color: #5a4a3a; padding-bottom: 6px; margin-bottom: 16px; border-bottom: none; }
 
         .pool-stats-mini { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; margin-bottom: 20px; padding: 12px 16px; background: rgba(255,255,255,0.6); border-radius: 14px; }
@@ -59,7 +61,7 @@
         .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: flex-start; width: 100%; }
 
         .card-mini {
-            width: 100px; flex: 0 0 100px; height: 72px; background: #fff; border-radius: 10px; padding: 6px 6px;
+            width: 110px; flex: 0 0 110px; height: 76px; background: #fff; border-radius: 10px; padding: 6px 6px;
             text-align: center; cursor: pointer; transition: all 0.15s; border: 2px solid;
             display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
             box-sizing: border-box;
@@ -125,11 +127,14 @@
 
         @media (max-width: 900px) {
             body { padding: 14px 16px; }
+            .all-pools-row { flex-direction: column; gap: 16px; }
+            .all-pools-row .pool-section { flex: 1 1 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .all-pools-row .rarity-groups-flow { flex-wrap: nowrap; }
             .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
             .main-title { font-size: 32px; }
             .pool-tab { font-size: 15px; padding: 8px 20px; }
             .pool-section-title { font-size: 22px; }
-            .card-mini { width: 92px; flex: 0 0 92px; height: 68px; padding: 5px 4px; }
+            .card-mini { width: 100px; flex: 0 0 100px; height: 72px; padding: 5px 4px; }
             .card-mini .mini-id { font-size: 13px; }
         }
         @media (max-width: 600px) {
@@ -139,7 +144,7 @@
             .main-title { font-size: 26px; }
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 95px; flex: 0 0 95px; height: 78px; padding: 8px 6px; }
+            .card-mini { width: 105px; flex: 0 0 105px; height: 80px; padding: 8px 6px; }
             .card-mini .mini-id { font-size: 13px; }
             .card-mini .mini-count { font-size: 10px; }
             .modal { padding: 14px; }
@@ -158,7 +163,7 @@
             .pool-stats-mini .stat-item .label { font-size: 10px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 85px; flex: 0 0 85px; height: 72px; padding: 6px 5px; }
+            .card-mini { width: 95px; flex: 0 0 95px; height: 74px; padding: 6px 5px; }
             .card-mini .mini-id { font-size: 12px; }
             .card-mini .mini-count { font-size: 9px; }
             .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
@@ -243,7 +248,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v25';
+    const STORAGE_KEY = 'tenniversary_cards_v26';
 
     const CARD_CATEGORIES = {
         'R': [
@@ -540,7 +545,7 @@
         if (currentView === 'all') {
             const pools = ['A', 'B'];
             const labels = { A:'A卡池-兔兔池', B:'B卡池-猫猫池' };
-            let html = '';
+            let html = `<div class="all-pools-row">`;
             pools.forEach(pool => {
                 const poolCards = appData.cards.filter(c => c.pool === pool);
                 html += `<div class="pool-section"><div class="pool-section-title">${labels[pool]}</div>`;
@@ -548,6 +553,7 @@
                 html += `<div class="rarity-groups-flow">${allRarities.map(r => renderRarityWithCats(r, pool, poolCards)).join('')}</div>`;
                 html += `</div>`;
             });
+            html += `</div>`;
             cardList.innerHTML = html || '<div class="empty-state">还没有卡牌，点击「新增抽卡」开始记录！</div>';
             bindEvents(true);
         } else {
