@@ -59,13 +59,13 @@
         .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: flex-start; width: 100%; }
 
         .card-mini {
-            width: 90px; flex: 0 0 90px; height: 72px; background: #fff; border-radius: 10px; padding: 6px 4px;
+            width: 100px; flex: 0 0 100px; height: 72px; background: #fff; border-radius: 10px; padding: 6px 6px;
             text-align: center; cursor: pointer; transition: all 0.15s; border: 2px solid;
             display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
             box-sizing: border-box;
         }
         .card-mini:active { transform: scale(0.95); }
-        .card-mini .mini-id { font-weight: 700; font-size: 14px; color: #333; white-space: nowrap; }
+        .card-mini .mini-id { font-weight: 700; font-size: 13px; color: #333; white-space: nowrap; }
         .card-mini .mini-count { font-size: 10px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
         .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
         .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
@@ -129,7 +129,7 @@
             .main-title { font-size: 32px; }
             .pool-tab { font-size: 15px; padding: 8px 20px; }
             .pool-section-title { font-size: 22px; }
-            .card-mini { width: 82px; flex: 0 0 82px; height: 68px; padding: 5px 4px; }
+            .card-mini { width: 92px; flex: 0 0 92px; height: 68px; padding: 5px 4px; }
             .card-mini .mini-id { font-size: 13px; }
         }
         @media (max-width: 600px) {
@@ -139,7 +139,7 @@
             .main-title { font-size: 26px; }
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 86px; flex: 0 0 86px; height: 78px; padding: 8px 6px; }
+            .card-mini { width: 95px; flex: 0 0 95px; height: 78px; padding: 8px 6px; }
             .card-mini .mini-id { font-size: 13px; }
             .card-mini .mini-count { font-size: 10px; }
             .modal { padding: 14px; }
@@ -149,7 +149,7 @@
             .rarity-group { flex: 0 1 auto; min-width: auto; margin-bottom: 6px; }
             .rarity-label { font-size: 15px; padding: 4px 14px; border-radius: 16px; }
             .category-row { flex-wrap: wrap; }
-            .category-box { max-width: 100%; }
+            .category-box { max-width: 280px; }
             .category-box .card-grid { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
             .slot-row select { max-width: 100px; min-width: 80px; font-size: 11px; }
             .slot-row input[type="text"] { max-width: 100px; min-width: 80px; font-size: 11px; }
@@ -158,7 +158,7 @@
             .pool-stats-mini .stat-item .label { font-size: 10px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 78px; flex: 0 0 78px; height: 72px; padding: 6px 5px; }
+            .card-mini { width: 85px; flex: 0 0 85px; height: 72px; padding: 6px 5px; }
             .card-mini .mini-id { font-size: 12px; }
             .card-mini .mini-count { font-size: 9px; }
             .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
@@ -243,7 +243,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v24';
+    const STORAGE_KEY = 'tenniversary_cards_v25';
 
     const CARD_CATEGORIES = {
         'R': [
@@ -430,7 +430,6 @@
         if (!cats) return '';
         let html = `<div class="rarity-group rarity-${rarity.toLowerCase()}"><div class="rarity-label">${rarity}</div><div class="category-row">`;
         if (rarity === 'UR') {
-            // UR 保留中文名+编号，同时加分类框
             const allIds = [];
             cats.forEach(c => allIds.push(...c.ids));
             let total = 0;
