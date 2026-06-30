@@ -61,7 +61,7 @@
         .category-box .card-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: flex-start; width: 100%; }
 
         .card-mini {
-            width: 110px; flex: 0 0 110px; height: 76px; background: #fff; border-radius: 10px; padding: 6px 6px;
+            width: 115px; flex: 0 0 115px; height: 76px; background: #fff; border-radius: 10px; padding: 6px 6px;
             text-align: center; cursor: pointer; transition: all 0.15s; border: 2px solid;
             display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
             box-sizing: border-box;
@@ -139,12 +139,15 @@
         }
         @media (max-width: 600px) {
             body { padding: 10px 12px; }
+            .all-pools-row { flex-direction: column; gap: 16px; }
+            .all-pools-row .pool-section { flex: 1 1 auto; overflow-x: visible; }
+            .all-pools-row .rarity-groups-flow { flex-wrap: wrap; }
             .stats-row { grid-template-columns: repeat(2,1fr); gap: 6px; }
             .stat-card .value { font-size: 24px; }
             .main-title { font-size: 26px; }
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 105px; flex: 0 0 105px; height: 80px; padding: 8px 6px; }
+            .card-mini { width: 108px; flex: 0 0 108px; height: 80px; padding: 8px 6px; }
             .card-mini .mini-id { font-size: 13px; }
             .card-mini .mini-count { font-size: 10px; }
             .modal { padding: 14px; }
@@ -163,7 +166,7 @@
             .pool-stats-mini .stat-item .label { font-size: 10px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 95px; flex: 0 0 95px; height: 74px; padding: 6px 5px; }
+            .card-mini { width: 98px; flex: 0 0 98px; height: 74px; padding: 6px 5px; }
             .card-mini .mini-id { font-size: 12px; }
             .card-mini .mini-count { font-size: 9px; }
             .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
@@ -248,7 +251,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v26';
+    const STORAGE_KEY = 'tenniversary_cards_v27';
 
     const CARD_CATEGORIES = {
         'R': [
