@@ -71,6 +71,8 @@
         .card-mini .mini-count { font-size: 10px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
         .card-mini .mini-count span { font-weight: 700; color: #8b7355; }
         .card-mini.unowned { opacity: 0.4; filter: grayscale(0.5); }
+        .card-mini .owned-dot { display: none; }
+        .card-mini.owned { box-shadow: inset 0 0 0 2px rgba(0,0,0,0.06); }
 
         .card-mini.rarity-ur { border-color: #e8c4d0; background: #fef6f8; }
         .card-mini.rarity-sp { border-color: #e8d0d0; background: #fef9f9; }
@@ -129,12 +131,13 @@
             body { padding: 14px 16px; }
             .all-pools-row { flex-direction: column; gap: 16px; }
             .all-pools-row .pool-section { flex: 1 1 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .all-pools-row .rarity-groups-flow { flex-wrap: nowrap; }
+            .all-pools-row .rarity-groups-flow { flex-wrap: nowrap; gap: 14px 20px; }
+            .all-pools-row .rarity-group { flex: 0 0 auto; min-width: auto; }
             .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
             .main-title { font-size: 32px; }
             .pool-tab { font-size: 15px; padding: 8px 20px; }
             .pool-section-title { font-size: 22px; }
-            .card-mini { width: 100px; flex: 0 0 100px; height: 72px; padding: 5px 4px; }
+            .card-mini { width: 105px; flex: 0 0 105px; height: 74px; padding: 6px 5px; }
             .card-mini .mini-id { font-size: 13px; }
         }
         @media (max-width: 600px) {
@@ -147,7 +150,7 @@
             .main-title { font-size: 26px; }
             .pool-tab { font-size: 13px; padding: 6px 14px; }
             .pool-section-title { font-size: 18px; }
-            .card-mini { width: 108px; flex: 0 0 108px; height: 80px; padding: 8px 6px; }
+            .card-mini { width: 112px; flex: 0 0 112px; height: 82px; padding: 8px 7px; }
             .card-mini .mini-id { font-size: 13px; }
             .card-mini .mini-count { font-size: 10px; }
             .modal { padding: 14px; }
@@ -166,7 +169,7 @@
             .pool-stats-mini .stat-item .label { font-size: 10px; }
         }
         @media (max-width: 400px) {
-            .card-mini { width: 98px; flex: 0 0 98px; height: 74px; padding: 6px 5px; }
+            .card-mini { width: 102px; flex: 0 0 102px; height: 76px; padding: 6px 6px; }
             .card-mini .mini-id { font-size: 12px; }
             .card-mini .mini-count { font-size: 9px; }
             .slot-row select { max-width: 85px; min-width: 70px; font-size: 10px; }
@@ -251,7 +254,7 @@
 
 <script>
 (function() {
-    const STORAGE_KEY = 'tenniversary_cards_v27';
+    const STORAGE_KEY = 'tenniversary_cards_v29';
 
     const CARD_CATEGORIES = {
         'R': [
@@ -453,7 +456,7 @@
                 const count = card ? card.history.length : 0;
                 const isOwned = count > 0;
                 const catName = cats.find(c => c.ids.includes(id))?.category || 'UR';
-                html += `<div class="card-mini ${isOwned ? 'rarity-ur owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${catName} (${id})</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div>${isOwned ? '<span class="owned-dot">●</span>' : ''}</div>`;
+                html += `<div class="card-mini ${isOwned ? 'rarity-ur owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${catName} (${id})</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div></div>`;
             });
             html += `</div></div>`;
         } else {
@@ -471,7 +474,7 @@
                     const card = poolCards.find(c => c.name === id);
                     const count = card ? card.history.length : 0;
                     const isOwned = count > 0;
-                    html += `<div class="card-mini ${isOwned ? 'rarity-'+rarity.toLowerCase()+' owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div>${isOwned ? '<span class="owned-dot">●</span>' : ''}</div>`;
+                    html += `<div class="card-mini ${isOwned ? 'rarity-'+rarity.toLowerCase()+' owned' : 'unowned'}" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">${isOwned ? '拥有 <span>'+count+'</span> 张' : '未拥有'}</div></div>`;
                 });
                 html += `</div></div>`;
             });
@@ -495,14 +498,14 @@
                 const card = poolCards.find(c => c.name === id);
                 const count = card ? card.history.length : 0;
                 const catName = cats.find(c => c.ids.includes(id))?.category || 'UR';
-                html += `<div class="card-mini rarity-ur owned" data-pool="${pool}" data-id="${id}"><div class="mini-id">${catName} (${id})</div><div class="mini-count">拥有 <span>${count}</span> 张</div><span class="owned-dot">●</span></div>`;
+                html += `<div class="card-mini rarity-ur owned" data-pool="${pool}" data-id="${id}"><div class="mini-id">${catName} (${id})</div><div class="mini-count">拥有 <span>${count}</span> 张</div></div>`;
             });
             html += `</div></div>`;
         } else {
             ownedIds.forEach(id => {
                 const card = poolCards.find(c => c.name === id);
                 const count = card ? card.history.length : 0;
-                html += `<div class="card-mini rarity-${rarity.toLowerCase()} owned" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">拥有 <span>${count}</span> 张</div><span class="owned-dot">●</span></div>`;
+                html += `<div class="card-mini rarity-${rarity.toLowerCase()} owned" data-pool="${pool}" data-id="${id}"><div class="mini-id">${id}</div><div class="mini-count">拥有 <span>${count}</span> 张</div></div>`;
             });
         }
         html += `</div></div>`;
